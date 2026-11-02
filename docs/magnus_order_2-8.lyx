@@ -1,0 +1,5876 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\setlength{\abovecaptionskip}{0pt}\setlength{\belowcaptionskip}{6pt}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize letterpaper
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+\begin_layout Title
+The centered Magnus exponent and Magnus quadrature formulas of orders 2, 4, 6 and 8
+\end_layout
+
+\begin_layout Author
+Kenneth C. Johnson
+\begin_inset Newline newline
+\end_inset
+
+ken@kjinnovation.com
+\end_layout
+
+\begin_layout Date
+Version 02-Nov-2026
+\end_layout
+
+\begin_layout Section*
+Abstract
+\end_layout
+
+\begin_layout Standard
+\noindent
+The Magnus exponent is formulated over an integration interval 
+\begin_inset Formula $[-t,t]$
+\end_inset
+ that is centered on the origin, so that the solution at 
+\begin_inset Formula $t$
+\end_inset
+ is obtained from the solution at 
+\begin_inset Formula $-t$
+\end_inset
+. In this centered formulation the propagator satisfies 
+\begin_inset Formula $U(-t)=U(t)^{-1}$
+\end_inset
+, the Magnus exponent is an odd function of 
+\begin_inset Formula $t$
+\end_inset
+, and the Magnus theorem takes a form in which the even and odd parts of the coefficient matrix appear separately. The Magnus exponent is then expressed in Legendre moments of the coefficient matrix over the centered interval, and quadrature formulas with residual errors of order 
+\begin_inset Formula $t^3$
+\end_inset
+, 
+\begin_inset Formula $t^5$
+\end_inset
+, 
+\begin_inset Formula $t^7$
+\end_inset
+ and 
+\begin_inset Formula $t^9$
+\end_inset
+ are given, using 0, 1, 3 and 6 commutators with the moments evaluated by Gauss-Legendre, Newton-Cotes or Gauss-Lobatto quadrature, and Gauss-Kronrod rules are shown to give embedded error estimates. The methodology and results are compared with those of Blanes et al. 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2000"
+literal "false"
+\end_inset
+, 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2002"
+literal "false"
+\end_inset
+, 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcor2009"
+literal "false"
+\end_inset
+.
+\end_layout
+
+\begin_layout Section*
+Linear differential equations
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+first-order, linear differential equation
+\emph default
+ or system of differential equations has the form
+\begin_inset Formula 
+\begin{equation}
+F'(t)=A(t)\cdot F(t)+B(t)\label{eq:ode}
+\end{equation}
+
+\end_inset
+where 
+\begin_inset Formula $F(t)$
+\end_inset
+ and 
+\begin_inset Formula $B(t)$
+\end_inset
+ are vector functions and 
+\begin_inset Formula $A(t)$
+\end_inset
+ is a square-matrix function of scalar argument 
+\begin_inset Formula $t$
+\end_inset
+. The equation is 
+\emph on
+autonomous
+\emph default
+ if 
+\begin_inset Formula $A$
+\end_inset
+ and 
+\begin_inset Formula $B$
+\end_inset
+ are constant, and is 
+\emph on
+homogeneous
+\emph default
+ if 
+\begin_inset Formula $B(t)$
+\end_inset
+ is identically zero.
+\end_layout
+
+\begin_layout Standard
+In the centered formulation, the integration interval is 
+\begin_inset Formula $[-t,t]$
+\end_inset
+: the value 
+\begin_inset Formula $F(-t)$
+\end_inset
+ is specified and 
+\begin_inset Formula $F(t)$
+\end_inset
+ is to be determined. Any interval can be put in this form by shifting the time origin to its midpoint; an interval of length 
+\begin_inset Formula $h$
+\end_inset
+ centered at 
+\begin_inset Formula $t_0$
+\end_inset
+ corresponds to 
+\begin_inset Formula $t=h/2$
+\end_inset
+, with 
+\begin_inset Formula $A(\tau)$
+\end_inset
+ and 
+\begin_inset Formula $B(\tau)$
+\end_inset
+ replaced by 
+\begin_inset Formula $A(t_0+\tau)$
+\end_inset
+ and 
+\begin_inset Formula $B(t_0+\tau)$
+\end_inset
+.
+\end_layout
+
+\begin_layout Standard
+A nonhomogeneous equation can be converted to a homogeneous equation by using an alternative formulation of Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:ode"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+,
+\begin_inset Formula 
+\begin{equation}
+\frac{d}{dt}\begin{pmatrix}F(t)\\ 1\end{pmatrix}=\begin{pmatrix}A(t) & B(t)\\ \mathbf{0} & 0\end{pmatrix}\cdot\begin{pmatrix}F(t)\\ 1\end{pmatrix}\label{eq:aug}
+\end{equation}
+
+\end_inset
+where 
+\begin_inset Formula $\mathbf{0}$
+\end_inset
+ represents a zero row vector. Therefore, we need only consider homogeneous equations, although Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:aug"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ might be implemented to efficiently take advantage of the zeros in the coefficient matrix.
+\end_layout
+
+\begin_layout Standard
+With 
+\begin_inset Formula $B(t)=\mathbf{0}$
+\end_inset
+, the value 
+\begin_inset Formula $F(t)$
+\end_inset
+ is a linear function of 
+\begin_inset Formula $F(-t)$
+\end_inset
+,
+\begin_inset Formula 
+\begin{equation}
+F(t)=U(t)\cdot F(-t)\label{eq:centered}
+\end{equation}
+
+\end_inset
+where the propagator 
+\begin_inset Formula $U(t)$
+\end_inset
+ is defined by
+\begin_inset Formula 
+\begin{equation}
+U'(t)=A(t)\cdot U(t)+U(t)\cdot A(-t),\quad U(0)=\mathbf{I}\label{eq:uode}
+\end{equation}
+
+\end_inset
+and 
+\begin_inset Formula $\mathbf{I}$
+\end_inset
+ is the identity matrix. Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:uode"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ follows from differentiating Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:centered"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ with respect to 
+\begin_inset Formula $t$
+\end_inset
+, using 
+\begin_inset Formula $\frac{d}{dt}F(-t)=-F'(-t)=-A(-t)\cdot F(-t)$
+\end_inset
+,
+\begin_inset Formula 
+\begin{equation}
+F'(t)=U'(t)\cdot F(-t)-U(t)\cdot A(-t)\cdot F(-t)\label{eq:diffcent}
+\end{equation}
+
+\end_inset
+and equating this with 
+\begin_inset Formula $F'(t)=A(t)\cdot F(t)=A(t)\cdot U(t)\cdot F(-t)$
+\end_inset
+. Both expressions hold for every solution 
+\begin_inset Formula $F$
+\end_inset
+, and 
+\begin_inset Formula $F(-t)$
+\end_inset
+ can take any value, so the matrix coefficients of 
+\begin_inset Formula $F(-t)$
+\end_inset
+ are equal; this is Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:uode"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+. The initial condition 
+\begin_inset Formula $U(0)=\mathbf{I}$
+\end_inset
+ is Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:centered"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ at 
+\begin_inset Formula $t=0$
+\end_inset
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $U(t)$
+\end_inset
+ is related to the conventional (uncentered) propagator 
+\begin_inset Formula $V(t)$
+\end_inset
+, defined by
+\begin_inset Formula 
+\begin{equation}
+V'(t)=A(t)\cdot V(t),\quad V(0)=\mathbf{I}\label{eq:vode}
+\end{equation}
+
+\end_inset
+which gives 
+\begin_inset Formula $F(t)=V(t)\cdot F(0)$
+\end_inset
+ for every 
+\begin_inset Formula $t$
+\end_inset
+. Hence 
+\begin_inset Formula $F(t)=V(t)\cdot F(0)$
+\end_inset
+ and 
+\begin_inset Formula $F(-t)=V(-t)\cdot F(0)$
+\end_inset
+, and eliminating 
+\begin_inset Formula $F(0)$
+\end_inset
+ gives Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:centered"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ with
+\begin_inset Formula 
+\begin{equation}
+U(t)=V(t)\cdot V(-t)^{-1}\label{eq:uv}
+\end{equation}
+
+\end_inset
+Replacing 
+\begin_inset Formula $t$
+\end_inset
+ by 
+\begin_inset Formula $-t$
+\end_inset
+ in Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:uv"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ gives the time-reversal property of the centered propagator,
+\begin_inset Formula 
+\begin{equation}
+U(-t)=V(-t)\cdot V(t)^{-1}=U(t)^{-1}\label{eq:uinv}
+\end{equation}
+
+\end_inset
+(Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:uinv"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ also follows directly from Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:centered"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+: 
+\begin_inset Formula $F(-t)=U(-t)\cdot F(t)$
+\end_inset
+.) The centered propagator and the time-reversal property of Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:uinv"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ appear in Blanes et al. 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcor2009"
+literal "false"
+\end_inset
+ (its Eqs. 63-66), where they are used to show that the Magnus exponent of a step contains only odd powers of the step size.
+\end_layout
+
+\begin_layout Section*
+The centered Magnus exponent
+\end_layout
+
+\begin_layout Standard
+Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:uode"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ has an exponential-matrix solution,
+\begin_inset Formula 
+\begin{equation}
+U(t)=\exp(\Omega(t))\label{eq:uexp}
+\end{equation}
+
+\end_inset
+If the values of 
+\begin_inset Formula $A$
+\end_inset
+ at all times commute with each other, then 
+\begin_inset Formula $\Omega(t)$
+\end_inset
+ is the integral of 
+\begin_inset Formula $A$
+\end_inset
+ over the interval, 
+\begin_inset Formula $\Omega(t)=\int_{-t}^{t}dt_1\cdot A(t_1)$
+\end_inset
+, but we are concerned here with the case where this condition does not hold. In general, 
+\begin_inset Formula $\Omega(t)$
+\end_inset
+ (the 
+\emph on
+centered Magnus exponent
+\emph default
+) is defined by the conditions
+\begin_inset Formula 
+\begin{equation}
+\frac{d}{dt}\exp(\Omega(t))=A(t)\cdot\exp(\Omega(t))+\exp(\Omega(t))\cdot A(-t),\quad\Omega(0)=\mathbf{0}\label{eq:omegadef}
+\end{equation}
+
+\end_inset
+For 
+\begin_inset Formula $t$
+\end_inset
+ small enough that the matrix logarithm near 
+\begin_inset Formula $\mathbf{I}$
+\end_inset
+ is unique, Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:uinv"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ implies that 
+\begin_inset Formula $\Omega$
+\end_inset
+ is an odd function of 
+\begin_inset Formula $t$
+\end_inset
+,
+\begin_inset Formula 
+\begin{equation}
+\Omega(-t)=-\Omega(t)\label{eq:odd}
+\end{equation}
+
+\end_inset
+\end_layout
+
+\begin_layout Section*
+Commutator algebra
+\end_layout
+
+\begin_layout Standard
+The derivations below use the following definitions and relations. The 
+\emph on
+commutator
+\emph default
+ 
+\begin_inset Formula $[\ldots]$
+\end_inset
+ is defined, for square matrix arguments 
+\begin_inset Formula $A$
+\end_inset
+ and 
+\begin_inset Formula $B$
+\end_inset
+, as
+\begin_inset Formula 
+\begin{equation}
+[A,B]=A\cdot B-B\cdot A\label{eq:comm}
+\end{equation}
+
+\end_inset
+The commutator is antisymmetric and satisfies the Jacobi identity,
+\begin_inset Formula 
+\begin{equation}
+[B,A]=-[A,B]\label{eq:anti}
+\end{equation}
+
+\end_inset
+
+\begin_inset Formula 
+\begin{equation}
+[A,[B,C]]+[B,[C,A]]+[C,[A,B]]=\mathbf{0}\label{eq:jacobi}
+\end{equation}
+
+\end_inset
+The 
+\emph on
+adjoint mapping
+\emph default
+ “
+\begin_inset Formula $ad$
+\end_inset
+” is defined by
+\begin_inset Formula 
+\begin{equation}
+ad_{\Omega}^{j}(X)=\underbrace{[\Omega,[\Omega,\ldots[\Omega}_{j\text{ times}},X]]]:\quad ad_{\Omega}^{0}(X)=X,\quad ad_{\Omega}^{j+1}(X)=[\Omega,ad_{\Omega}^{j}(X)]\label{eq:addef}
+\end{equation}
+
+\end_inset
+
+\begin_inset Formula $ad$
+\end_inset
+ has the following properties,
+\begin_inset Formula 
+\begin{equation}
+ad_{\Omega}^{j}(a\cdot X+b\cdot Y)=a\cdot ad_{\Omega}^{j}(X)+b\cdot ad_{\Omega}^{j}(Y)\quad(\text{for scalars }a\text{ and }b)\label{eq:adlin}
+\end{equation}
+
+\end_inset
+
+\begin_inset Formula 
+\begin{equation}
+ad_{\sigma\cdot\Omega}^{j}(X)=\sigma^{j}\cdot ad_{\Omega}^{j}(X)\quad(\text{scalar }\sigma)\label{eq:adscale}
+\end{equation}
+
+\end_inset
+
+\begin_inset Formula 
+\begin{equation}
+ad_{\Omega}^{j+k}(X)=ad_{\Omega}^{j}(ad_{\Omega}^{k}(X))\label{eq:adcomp}
+\end{equation}
+
+\end_inset
+\end_layout
+
+\begin_layout Section*
+Two exponential identities
+\end_layout
+
+\begin_layout Standard
+The similarity transformation 
+\begin_inset Formula $\exp(\Omega)\cdot X\cdot\exp(-\Omega)$
+\end_inset
+ has a series expansion of the form
+\begin_inset Formula 
+\begin{equation}
+\exp(\Omega)\cdot X\cdot\exp(-\Omega)=\sum_{j}\frac{1}{j!}\cdot ad_{\Omega}^{j}(X)\label{eq:sim}
+\end{equation}
+
+\end_inset
+This relation is derived as follows: For scalar 
+\begin_inset Formula $\sigma$
+\end_inset
+, the following relation is obtained by induction,
+\begin_inset Formula 
+\begin{equation}
+\frac{d^{j}}{d\sigma^{j}}\big(\exp(\sigma\cdot\Omega)\cdot X\cdot\exp(-\sigma\cdot\Omega)\big)=\exp(\sigma\cdot\Omega)\cdot ad_{\Omega}^{j}(X)\cdot\exp(-\sigma\cdot\Omega)\label{eq:simind}
+\end{equation}
+
+\end_inset
+Hence, the expression 
+\begin_inset Formula $\exp(\sigma\cdot\Omega)\cdot X\cdot\exp(-\sigma\cdot\Omega)$
+\end_inset
+ has the Taylor series expansion
+\begin_inset Formula 
+\begin{equation}
+\exp(\sigma\cdot\Omega)\cdot X\cdot\exp(-\sigma\cdot\Omega)=\sum_{j}\frac{\sigma^{j}}{j!}\cdot ad_{\Omega}^{j}(X)\label{eq:simtaylor}
+\end{equation}
+
+\end_inset
+Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:sim"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ follows from Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:simtaylor"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ with 
+\begin_inset Formula $\sigma=1$
+\end_inset
+.
+\end_layout
+
+\begin_layout Standard
+The derivative of 
+\begin_inset Formula $\exp(\Omega(t))$
+\end_inset
+ has the following relationship to 
+\begin_inset Formula $\Omega'(t)$
+\end_inset
+,
+\begin_inset Formula 
+\begin{equation}
+\frac{d}{dt}\exp(\Omega(t))=\left(\sum_{j}\frac{1}{(j+1)!}\cdot ad_{\Omega(t)}^{j}(\Omega'(t))\right)\cdot\exp(\Omega(t))\label{eq:dexp}
+\end{equation}
+
+\end_inset
+This relation is derived by first applying Eqs. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:sim"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:adscale"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ to simplify the following expression,
+\begin_inset Formula 
+\begin{equation}
+\begin{aligned}
+&\frac{\partial}{\partial\sigma}\left(\left(\frac{\partial}{\partial t}\exp(\sigma\cdot\Omega(t))\right)\cdot\exp(-\sigma\cdot\Omega(t))\right)\\
+&=\left(\frac{\partial}{\partial t}\big(\exp(\sigma\cdot\Omega(t))\cdot\Omega(t)\big)\right)\cdot\exp(-\sigma\cdot\Omega(t))\\
+&\quad-\left(\frac{\partial}{\partial t}\exp(\sigma\cdot\Omega(t))\right)\cdot\Omega(t)\cdot\exp(-\sigma\cdot\Omega(t))\\
+&=\exp(\sigma\cdot\Omega(t))\cdot\Omega'(t)\cdot\exp(-\sigma\cdot\Omega(t))\\
+&=\sum_{j}\frac{1}{j!}\cdot ad_{\sigma\cdot\Omega(t)}^{j}(\Omega'(t))=\sum_{j}\frac{\sigma^{j}}{j!}\cdot ad_{\Omega(t)}^{j}(\Omega'(t))
+\end{aligned}\label{eq:dexpsigma}
+\end{equation}
+
+\end_inset
+Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:dexpsigma"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ is integrated over 
+\begin_inset Formula $\sigma$
+\end_inset
+ to obtain Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:dexp"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+,
+\begin_inset Formula 
+\begin{equation}
+\begin{aligned}
+&\left(\frac{\partial}{\partial t}\exp(\Omega(t))\right)\cdot\exp(-\Omega(t))\\
+&=\int_{0}^{1}d\sigma\cdot\frac{\partial}{\partial\sigma}\left(\left(\frac{\partial}{\partial t}\exp(\sigma\cdot\Omega(t))\right)\cdot\exp(-\sigma\cdot\Omega(t))\right)\\
+&=\sum_{j}\frac{1}{(j+1)!}\cdot ad_{\Omega(t)}^{j}(\Omega'(t))
+\end{aligned}\label{eq:dexpint}
+\end{equation}
+
+\end_inset
+\end_layout
+
+\begin_layout Section*
+The centered Magnus theorem
+\end_layout
+
+\begin_layout Standard
+The last term in Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:omegadef"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ is rewritten with Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:sim"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ as 
+\begin_inset Formula $\exp(\Omega(t))\cdot A(-t)=\big(\exp(\Omega(t))\cdot A(-t)\cdot\exp(-\Omega(t))\big)\cdot\exp(\Omega(t))=\big(\sum_{j}\frac{1}{j!}\cdot ad_{\Omega(t)}^{j}(A(-t))\big)\cdot\exp(\Omega(t))$
+\end_inset
+. Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:dexp"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ and this expression are substituted into Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:omegadef"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+, and the common right factor 
+\begin_inset Formula $\exp(\Omega(t))$
+\end_inset
+ is cancelled,
+\begin_inset Formula 
+\begin{equation}
+\sum_{j}\frac{1}{(j+1)!}\cdot ad_{\Omega(t)}^{j}(\Omega'(t))=A(t)+\sum_{j}\frac{1}{j!}\cdot ad_{\Omega(t)}^{j}(A(-t))\label{eq:subst}
+\end{equation}
+
+\end_inset
+This relation is inverted to solve for 
+\begin_inset Formula $\Omega'(t)$
+\end_inset
+,
+\end_layout
+
+\begin_layout Standard
+\emph on
+The centered Magnus theorem
+\emph default
+:
+\begin_inset Formula 
+\begin{equation}
+\begin{aligned}
+\Omega'(t)&=\sum_{k}\frac{B_{k}}{k!}\cdot ad_{\Omega(t)}^{k}\big(A(t)+(-1)^{k}\cdot A(-t)\big)\\
+&=A(t)+A(-t)-\tfrac{1}{2}\cdot[\Omega(t),A(t)-A(-t)]+\tfrac{1}{12}\cdot[\Omega(t),[\Omega(t),A(t)+A(-t)]]\\
+&\quad-\tfrac{1}{720}\cdot[\Omega(t),[\Omega(t),[\Omega(t),[\Omega(t),A(t)+A(-t)]]]]+O(t^{6})\\
+&\quad\big(\text{with }\Omega(0)=\mathbf{0},\ \Omega(t)=O(t)\big)
+\end{aligned}\label{eq:theorem}
+\end{equation}
+
+\end_inset
+The 
+\begin_inset Formula $B_k$
+\end_inset
+ factors are the 
+\emph on
+Bernoulli numbers
+\emph default
+, defined by
+\begin_inset Formula 
+\begin{equation}
+\begin{aligned}
+&B_{0}=1;\quad\text{For }j>0,\ B_{j}=-\sum_{k=0}^{j-1}\frac{j!}{(j-k+1)!\cdot k!}\cdot B_{k}\\
+&\{B_{0},B_{1},\ldots\}=\{1,-\tfrac{1}{2},\tfrac{1}{6},0,-\tfrac{1}{30},0,\tfrac{1}{42},0,-\tfrac{1}{30},0,\tfrac{5}{66},0,-\tfrac{691}{2730},\ldots\}
+\end{aligned}\label{eq:bernoulli}
+\end{equation}
+
+\end_inset
+(The truncated series residual in Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:theorem"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ is 
+\begin_inset Formula $O(t^6)$
+\end_inset
+, not 
+\begin_inset Formula $O(t^5)$
+\end_inset
+, because 
+\begin_inset Formula $B_5=0$
+\end_inset
+.)
+\end_layout
+
+\begin_layout Standard
+Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:theorem"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ is obtained from Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:subst"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ as follows. For a power series 
+\begin_inset Formula $f(x)=\sum_j f_j\cdot x^j$
+\end_inset
+ with scalar coefficients 
+\begin_inset Formula $f_j$
+\end_inset
+, define the operator
+\begin_inset Formula 
+\begin{equation}
+f(ad_{\Omega})(X)=\sum_{j}f_{j}\cdot ad_{\Omega}^{j}(X)\label{eq:opdef}
+\end{equation}
+
+\end_inset
+By Eqs. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:adlin"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:adcomp"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+, applying two such operators in succession is the same as applying the operator of the product series,
+\begin_inset Formula 
+\begin{equation}
+f(ad_{\Omega})\big(g(ad_{\Omega})(X)\big)=(f\cdot g)(ad_{\Omega})(X)\label{eq:opprod}
+\end{equation}
+
+\end_inset
+where 
+\begin_inset Formula $(f\cdot g)(x)=f(x)\cdot g(x)=\sum_j\big(\sum_{k=0}^{j}f_k\cdot g_{j-k}\big)\cdot x^j$
+\end_inset
+. Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:subst"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ has the form 
+\begin_inset Formula $s(ad_{\Omega(t)})(\Omega'(t))=A(t)+e(ad_{\Omega(t)})(A(-t))$
+\end_inset
+, with the power series
+\begin_inset Formula 
+\begin{equation}
+s(x)=\sum_{j}\frac{x^{j}}{(j+1)!},\quad e(x)=\sum_{j}\frac{x^{j}}{j!},\quad\beta(x)=\sum_{k}\frac{B_{k}}{k!}\cdot x^{k}\label{eq:series}
+\end{equation}
+
+\end_inset
+(
+\begin_inset Formula $e(x)$
+\end_inset
+ is the exponential series, and 
+\begin_inset Formula $x\cdot s(x)=e(x)-1$
+\end_inset
+.) The coefficient of 
+\begin_inset Formula $x^j$
+\end_inset
+ in 
+\begin_inset Formula $\beta(x)\cdot s(x)$
+\end_inset
+ is 
+\begin_inset Formula $\sum_{k=0}^{j}\frac{B_k}{k!\cdot(j-k+1)!}$
+\end_inset
+, which by Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:bernoulli"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ is 1 for 
+\begin_inset Formula $j=0$
+\end_inset
+ and 0 for 
+\begin_inset Formula $j>0$
+\end_inset
+:
+\begin_inset Formula 
+\begin{equation}
+\beta(x)\cdot s(x)=1\label{eq:betas}
+\end{equation}
+
+\end_inset
+Multiplying Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:betas"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ by 
+\begin_inset Formula $x$
+\end_inset
+ gives 
+\begin_inset Formula $\beta(x)\cdot(e(x)-1)=x$
+\end_inset
+. Replacing 
+\begin_inset Formula $x$
+\end_inset
+ by 
+\begin_inset Formula $-x$
+\end_inset
+ and multiplying by 
+\begin_inset Formula $-e(x)$
+\end_inset
+ (using 
+\begin_inset Formula $e(-x)\cdot e(x)=1$
+\end_inset
+) gives 
+\begin_inset Formula $\beta(-x)\cdot(e(x)-1)=x\cdot e(x)=\beta(x)\cdot e(x)\cdot(e(x)-1)$
+\end_inset
+. The common factor 
+\begin_inset Formula $e(x)-1=x\cdot s(x)$
+\end_inset
+ can be cancelled (power series have no zero divisors), so
+\begin_inset Formula 
+\begin{equation}
+\beta(x)\cdot e(x)=\beta(-x)\label{eq:betae}
+\end{equation}
+
+\end_inset
+Now 
+\begin_inset Formula $\beta(ad_{\Omega(t)})$
+\end_inset
+ is applied to both sides of Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:subst"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+. By Eqs. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:opprod"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:betas"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+, the left side becomes 
+\begin_inset Formula $\Omega'(t)$
+\end_inset
+. By Eqs. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:opprod"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:betae"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+, the right side becomes 
+\begin_inset Formula $\beta(ad_{\Omega(t)})(A(t))+\beta(-ad_{\Omega(t)})(A(-t))$
+\end_inset
+, which is the first line of Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:theorem"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+.
+\end_layout
+
+\begin_layout Standard
+Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:betae"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ also determines the odd Bernoulli numbers. Since 
+\begin_inset Formula $\beta(x)\cdot(e(x)-1)=x$
+\end_inset
+, it gives 
+\begin_inset Formula $\beta(-x)=\beta(x)+x$
+\end_inset
+; the odd terms of this power-series identity are
+\begin_inset Formula 
+\begin{equation}
+B_{1}=-\tfrac{1}{2},\quad B_{k}=0\ \ (k\text{ odd},\ k\ge3)\label{eq:oddbern}
+\end{equation}
+
+\end_inset
+Hence the centered Magnus theorem separates into the even part 
+\begin_inset Formula $A(t)+A(-t)$
+\end_inset
+ and the odd part 
+\begin_inset Formula $A(t)-A(-t)$
+\end_inset
+ of the coefficient matrix,
+\begin_inset Formula 
+\begin{equation}
+\Omega'(t)=\sum_{k\text{ even}}\frac{B_{k}}{k!}\cdot ad_{\Omega(t)}^{k}\big(A(t)+A(-t)\big)-\tfrac{1}{2}\cdot\big[\Omega(t),A(t)-A(-t)\big]\label{eq:evenodd}
+\end{equation}
+
+\end_inset
+\end_layout
+
+\begin_layout Section*
+Time-reversal symmetry
+\end_layout
+
+\begin_layout Standard
+Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:evenodd"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ is consistent with the odd symmetry of Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:odd"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+. If 
+\begin_inset Formula $\Omega(t)$
+\end_inset
+ is an odd function of 
+\begin_inset Formula $t$
+\end_inset
+, then each term on the right side of Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:evenodd"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ is an even function of 
+\begin_inset Formula $t$
+\end_inset
+: 
+\begin_inset Formula $ad_{\Omega(t)}^k$
+\end_inset
+ with 
+\begin_inset Formula $k$
+\end_inset
+ even preserves the even parity of 
+\begin_inset Formula $A(t)+A(-t)$
+\end_inset
+, and one commutator with the odd 
+\begin_inset Formula $\Omega(t)$
+\end_inset
+ turns the odd 
+\begin_inset Formula $A(t)-A(-t)$
+\end_inset
+ into an even function. So 
+\begin_inset Formula $\Omega'(t)$
+\end_inset
+ is even, and its integral with 
+\begin_inset Formula $\Omega(0)=\mathbf{0}$
+\end_inset
+ is odd. When 
+\begin_inset Formula $A$
+\end_inset
+ is expanded in a Taylor series about 
+\begin_inset Formula $t=0$
+\end_inset
+ and Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:evenodd"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ is solved by successive approximation, every term of the resulting series for 
+\begin_inset Formula $\Omega(t)$
+\end_inset
+ is therefore an odd power of 
+\begin_inset Formula $t$
+\end_inset
+.
+\end_layout
+
+\begin_layout Standard
+The leading term is 
+\begin_inset Formula $\Omega(t)=\int_{-t}^{t}dt_1\cdot A(t_1)+O(t^3)$
+\end_inset
+, from 
+\begin_inset Formula $\Omega'(t)=A(t)+A(-t)+O(t^2)$
+\end_inset
+.
+\end_layout
+
+\begin_layout Section*
+Centered Legendre moments
+\end_layout
+
+\begin_layout Standard
+The quadrature formulas below express 
+\begin_inset Formula $\Omega(t)$
+\end_inset
+ in terms of Legendre moments of 
+\begin_inset Formula $A$
+\end_inset
+ over the centered interval,
+\begin_inset Formula 
+\begin{equation}
+g_{k}(t)=\int_{-t}^{t}P_{k}(\tau/t)\cdot A(\tau)\,d\tau\label{eq:gdef}
+\end{equation}
+
+\end_inset
+where 
+\begin_inset Formula $P_k$
+\end_inset
+ is the Legendre polynomial of degree 
+\begin_inset Formula $k$
+\end_inset
+, defined by
+\begin_inset Formula 
+\begin{equation}
+P_{0}(u)=1,\quad P_{1}(u)=u,\quad(k+1)\cdot P_{k+1}(u)=(2k+1)\cdot u\cdot P_{k}(u)-k\cdot P_{k-1}(u)\label{eq:pdef}
+\end{equation}
+
+\end_inset
+The polynomials needed for Magnus formulas of orders up to 10 are listed in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:legendre"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+; a formula of order 
+\begin_inset Formula $2n$
+\end_inset
+ uses 
+\begin_inset Formula $P_0,\ldots,P_{n-1}$
+\end_inset
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Legendre polynomials 
+\begin_inset Formula $P_0,\ldots,P_4$
+\end_inset
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:legendre"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $k$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $P_k(u)$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $u$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $(3u^{2}-1)/2$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $(5u^{3}-3u)/2$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $(35u^{4}-30u^{2}+3)/8$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+The Legendre polynomials are orthogonal on 
+\begin_inset Formula $[-1,1]$
+\end_inset
+ and have definite parity,
+\begin_inset Formula 
+\begin{equation}
+\int_{-1}^{1}P_{j}(u)\cdot P_{k}(u)\,du=\frac{2}{2k+1}\cdot\delta_{jk},\quad P_{k}(-u)=(-1)^{k}\cdot P_{k}(u)\label{eq:porth}
+\end{equation}
+
+\end_inset
+(
+\begin_inset Formula $\delta_{jk}$
+\end_inset
+ is the Kronecker delta.) 
+\begin_inset Formula $g_0(t)$
+\end_inset
+ is the integral of 
+\begin_inset Formula $A$
+\end_inset
+ over the interval, and if 
+\begin_inset Formula $A$
+\end_inset
+ is constant then 
+\begin_inset Formula $g_k(t)=\mathbf{0}$
+\end_inset
+ for 
+\begin_inset Formula $k\ge1$
+\end_inset
+. With 
+\begin_inset Formula $A$
+\end_inset
+ expanded in a Taylor series about 
+\begin_inset Formula $\tau=0$
+\end_inset
+, Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:gdef"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ gives
+\begin_inset Formula 
+\begin{equation}
+g_{k}(t)=\sum_{j\ge k,\ j-k\text{ even}}c_{kj}\cdot\frac{t^{j+1}}{j!}\cdot A^{(j)}(0),\quad c_{kj}=\int_{-1}^{1}P_{k}(u)\cdot u^{j}\,du\label{eq:gtaylor}
+\end{equation}
+
+\end_inset
+(
+\begin_inset Formula $c_{kj}=0$
+\end_inset
+ for 
+\begin_inset Formula $j<k$
+\end_inset
+ and for odd 
+\begin_inset Formula $j-k$
+\end_inset
+), so 
+\begin_inset Formula $g_k(t)=O(t^{k+1})$
+\end_inset
+, with leading coefficient 
+\begin_inset Formula $c_{kk}=2^{k+1}\cdot(k!)^2/(2k+1)!$
+\end_inset
+. We call 
+\begin_inset Formula $k+1$
+\end_inset
+ the 
+\emph on
+weight
+\emph default
+ of 
+\begin_inset Formula $g_k$
+\end_inset
+; the weight of a product or commutator of moments is the sum of the weights of its factors, and a term of weight 
+\begin_inset Formula $n$
+\end_inset
+ is 
+\begin_inset Formula $O(t^n)$
+\end_inset
+. Replacing 
+\begin_inset Formula $t$
+\end_inset
+ by 
+\begin_inset Formula $-t$
+\end_inset
+ in Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:gdef"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+, substituting 
+\begin_inset Formula $\tau\to-\tau$
+\end_inset
+ and using Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:porth"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ shows that the moments have definite parity,
+\begin_inset Formula 
+\begin{equation}
+g_{k}(-t)=(-1)^{k+1}\cdot g_{k}(t)\label{eq:gpar}
+\end{equation}
+
+\end_inset
+
+\begin_inset Formula $g_0$
+\end_inset
+ and 
+\begin_inset Formula $g_2$
+\end_inset
+ are odd functions of 
+\begin_inset Formula $t$
+\end_inset
+, 
+\begin_inset Formula $g_1$
+\end_inset
+ and 
+\begin_inset Formula $g_3$
+\end_inset
+ are even, and a product of moments of weight 
+\begin_inset Formula $n$
+\end_inset
+ has parity 
+\begin_inset Formula $(-1)^n$
+\end_inset
+. Conversely, by orthogonality the moments determine 
+\begin_inset Formula $A$
+\end_inset
+ through its Legendre series,
+\begin_inset Formula 
+\begin{equation}
+A(\tau)=\sum_{k}\frac{2k+1}{2t}\cdot g_{k}(t)\cdot P_{k}(\tau/t),\quad-t\le\tau\le t\label{eq:alegendre}
+\end{equation}
+
+\end_inset
+which is a finite sum when 
+\begin_inset Formula $A$
+\end_inset
+ is a polynomial.
+\end_layout
+
+\begin_layout Section*
+The Magnus exponent in Legendre moments
+\end_layout
+
+\begin_layout Standard
+The Taylor-series solution of Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:evenodd"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ can be re-expressed in the moments by inverting Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:gtaylor"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+. This was done in exact rational arithmetic, by successive approximation of Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:evenodd"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ through order 
+\begin_inset Formula $t^9$
+\end_inset
+. Through weight 7 the result is, in the Lyndon basis of nested commutators,
+\begin_inset Formula 
+\begin{equation}
+\begin{aligned}
+\Omega(t)={}&g_{0}\\
+&-\tfrac{1}{2}[g_{0},g_{1}]\\
+&-\tfrac{1}{2}[g_{1},g_{2}]+\tfrac{1}{12}[g_{0},[g_{0},g_{2}]]\\
+&+\tfrac{3}{20}[[g_{0},g_{1}],g_{1}]+\tfrac{1}{120}[g_{0},[g_{0},[g_{0},g_{1}]]]\\
+&-\tfrac{1}{2}[g_{2},g_{3}]+\tfrac{1}{10}[g_{0},[g_{1},g_{3}]]\\
+&+\tfrac{5}{84}[[g_{0},g_{2}],g_{2}]-\tfrac{1}{20}[[g_{0},g_{3}],g_{1}]\\
+&-\tfrac{3}{14}[g_{1},[g_{1},g_{2}]]-\tfrac{1}{120}[g_{0},[g_{0},[g_{0},g_{3}]]]\\
+&-\tfrac{1}{168}[g_{0},[g_{0},[g_{1},g_{2}]]]-\tfrac{1}{28}[g_{0},[[g_{0},g_{2}],g_{1}]]\\
+&-\tfrac{3}{56}[[g_{0},g_{1}],[g_{0},g_{2}]]-\tfrac{9}{280}[[[g_{0},g_{1}],g_{1}],g_{1}]\\
+&-\tfrac{1}{504}[g_{0},[g_{0},[g_{0},[g_{0},g_{2}]]]]-\tfrac{1}{280}[g_{0},[g_{0},[[g_{0},g_{1}],g_{1}]]]\\
+&+\tfrac{1}{210}[[g_{0},[g_{0},g_{1}]],[g_{0},g_{1}]]-\tfrac{1}{5040}[g_{0},[g_{0},[g_{0},[g_{0},[g_{0},g_{1}]]]]]\\
+&+O(t^{9})
+\end{aligned}\label{eq:target}
+\end{equation}
+
+\end_inset
+Three properties of this series are used below. (i) Only odd weights occur, as Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:odd"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ requires. (ii) The only term outside commutators is 
+\begin_inset Formula $g_0$
+\end_inset
+. (iii) Through weight 
+\begin_inset Formula $2n-1$
+\end_inset
+, only 
+\begin_inset Formula $g_0,\ldots,g_{n-1}$
+\end_inset
+ occur; 
+\begin_inset Formula $g_k$
+\end_inset
+ first appears at weight 
+\begin_inset Formula $2k+1$
+\end_inset
+. A formula of order 
+\begin_inset Formula $2n$
+\end_inset
+, with residual 
+\begin_inset Formula $O(t^{2n+1})$
+\end_inset
+, therefore needs only the moments 
+\begin_inset Formula $g_0,\ldots,g_{n-1}$
+\end_inset
+, and it must reproduce the coefficients of the series at odd weights up to 
+\begin_inset Formula $2n-1$
+\end_inset
+ (the 
+\emph on
+order conditions
+\emph default
+, Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:conditions"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Order conditions and commutator counts.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:conditions"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="6">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Order
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Residual
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Moments
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Conditions at weights 3, 5, 7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Total
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Commutators
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $O(t^3)$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $g_0$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $O(t^5)$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $g_0,g_1$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $O(t^7)$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $g_0,g_1,g_2$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1, 4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $O(t^9)$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $g_0,\ldots,g_3$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1, 5, 14
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+The last column is the fewest commutators found, from a rank survey and a numerical search over commutator patterns; Blanes, Casas and Ros 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2002"
+literal "false"
+\end_inset
+ state the same minimum for orders 4, 6 and 8. The series in Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:target"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ agrees term by term with the expansion of the conventional Magnus exponent about the midpoint of a step of length 
+\begin_inset Formula $2t$
+\end_inset
+, which provides an independent check of Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:evenodd"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+.
+\end_layout
+
+\begin_layout Standard
+The formulas below are nested commutators 
+\begin_inset Formula $C_i=[X_i,Y_i]$
+\end_inset
+, where 
+\begin_inset Formula $X_i$
+\end_inset
+ and 
+\begin_inset Formula $Y_i$
+\end_inset
+ are linear combinations of moments and earlier commutators, and each operand has definite parity. A commutator of two odd or two even operands is even and is used only as an operand; the commutators that enter 
+\begin_inset Formula $\Omega(t)$
+\end_inset
+ are odd. Each formula is therefore odd in 
+\begin_inset Formula $t$
+\end_inset
+, like 
+\begin_inset Formula $\Omega(t)$
+\end_inset
+, and only its odd-weight terms need to be matched.
+\end_layout
+
+\begin_layout Section*
+Moment quadrature
+\end_layout
+
+\begin_layout Standard
+The moments are computed by quadrature from samples 
+\begin_inset Formula $A(u_i\cdot t)$
+\end_inset
+ at nodes 
+\begin_inset Formula $u_i\in[-1,1]$
+\end_inset
+. For a formula of order 
+\begin_inset Formula $2n$
+\end_inset
+ it suffices that the quadrature integrate polynomials of degree 
+\begin_inset Formula $2n-1$
+\end_inset
+ exactly. A rule of polynomial degree 
+\begin_inset Formula $d$
+\end_inset
+ computes 
+\begin_inset Formula $g_k$
+\end_inset
+ with an error made of multiples of 
+\begin_inset Formula $g_m$
+\end_inset
+ with 
+\begin_inset Formula $m\ge d+1-k$
+\end_inset
+, which raises the weight by at least 
+\begin_inset Formula $d+1-2k$
+\end_inset
+. Because 
+\begin_inset Formula $g_k$
+\end_inset
+ occurs only in terms of weight at least 
+\begin_inset Formula $2k+1$
+\end_inset
+, with 
+\begin_inset Formula $d=2n-1$
+\end_inset
+ the moment errors contribute only terms of weight 
+\begin_inset Formula $2n+1$
+\end_inset
+ or higher. In particular, 
+\begin_inset Formula $g_0$
+\end_inset
+, which occurs alone, is accurate to 
+\begin_inset Formula $O(t^{2n+1})$
+\end_inset
+, while the other moments, which occur only inside commutators with a partner of order 
+\begin_inset Formula $t$
+\end_inset
+, need only be accurate to 
+\begin_inset Formula $O(t^{2n})$
+\end_inset
+.
+\end_layout
+
+\begin_layout Standard
+\emph on
+Gauss-Legendre quadrature.
+\emph default
+ With 
+\begin_inset Formula $n$
+\end_inset
+ nodes 
+\begin_inset Formula $u_i$
+\end_inset
+ (the roots of 
+\begin_inset Formula $P_n$
+\end_inset
+) and weights 
+\begin_inset Formula $w_i$
+\end_inset
+, normalized so that 
+\begin_inset Formula $\sum_i w_i=1$
+\end_inset
+,
+\begin_inset Formula 
+\begin{equation}
+g_{k}(t)\approx 2t\cdot\sum_{i}w_{i}\cdot P_{k}(u_{i})\cdot A(u_{i}\cdot t)\label{eq:gauss}
+\end{equation}
+
+\end_inset
+which is exact for polynomials of degree 
+\begin_inset Formula $2n-1$
+\end_inset
+; 
+\begin_inset Formula $n=1$
+\end_inset
+, 2, 3 and 4 serve orders 2, 4, 6 and 8 (Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:gauss"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Gauss-Legendre nodes and weights.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:gauss"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="4">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nodes 
+\begin_inset Formula $n$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Order
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nodes 
+\begin_inset Formula $u_i$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Weights 
+\begin_inset Formula $w_i$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\pm1/\sqrt{3}$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1/2$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+; 
+\begin_inset Formula $\pm\sqrt{3/5}$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $4/9$
+\end_inset
+; 
+\begin_inset Formula $5/18$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\pm\sqrt{3/7-(2/7)\sqrt{6/5}}$
+\end_inset
+; 
+\begin_inset Formula $\pm\sqrt{3/7+(2/7)\sqrt{6/5}}$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $(18+\sqrt{30})/72$
+\end_inset
+; 
+\begin_inset Formula $(18-\sqrt{30})/72$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+(The order-8 nodes are approximately 
+\begin_inset Formula $\pm0.3399810436$
+\end_inset
+ and 
+\begin_inset Formula $\pm0.8611363116$
+\end_inset
+.)
+\end_layout
+
+\begin_layout Standard
+\emph on
+Newton-Cotes quadrature.
+\emph default
+ With equally spaced nodes including both endpoints (two nodes for order 2 and 
+\begin_inset Formula $2n-1$
+\end_inset
+ nodes for order 
+\begin_inset Formula $2n\ge4$
+\end_inset
+), the weights below are obtained by integrating the interpolating polynomial through the samples against 
+\begin_inset Formula $P_k$
+\end_inset
+. Applying the Newton-Cotes rule to the product 
+\begin_inset Formula $P_k\cdot A$
+\end_inset
+, as Blanes et al. do for their moments 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2000"
+literal "false"
+\end_inset
+, 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcor2009"
+literal "false"
+\end_inset
+, gives different weights for 
+\begin_inset Formula $k\ge2$
+\end_inset
+; it is also a rule of polynomial degree 
+\begin_inset Formula $2n-1$
+\end_inset
+ in the sense above, so it gives the same order, and on the test problems below the two choices agree in accuracy to within a few percent. The 
+\begin_inset Formula $g_0$
+\end_inset
+ weights are the classical closed Newton-Cotes weights (trapezoid, Simpson, Boole and seven-point rules). With 
+\begin_inset Formula $a_i$
+\end_inset
+ denoting the samples in node order,
+\begin_inset Formula 
+\begin{equation}
+\begin{aligned}
+&\text{Order 2 }(u=\pm1):\quad g_{0}=t\cdot(A(-t)+A(t))\\
+&\text{Order 4 }(u=-1,0,1):\quad g_{0}=\tfrac{t}{3}\cdot(A(-t)+4\cdot A(0)+A(t)),\quad g_{1}=\tfrac{t}{3}\cdot(A(t)-A(-t))\\
+&\text{Order 6 }(u=-1,-\tfrac{1}{2},0,\tfrac{1}{2},1):\\
+&\quad g_{0}=\tfrac{t}{45}\cdot(7a_{0}+32a_{1}+12a_{2}+32a_{3}+7a_{4}),\quad g_{1}=\tfrac{t}{45}\cdot(-7a_{0}-16a_{1}+16a_{3}+7a_{4})\\
+&\quad g_{2}=\tfrac{t}{315}\cdot(34a_{0}+32a_{1}-132a_{2}+32a_{3}+34a_{4})\\
+&\text{Order 8 }(u=-1,-\tfrac{2}{3},-\tfrac{1}{3},0,\tfrac{1}{3},\tfrac{2}{3},1):\\
+&\quad g_{0}=\tfrac{t}{420}\cdot(41a_{0}+216a_{1}+27a_{2}+272a_{3}+27a_{4}+216a_{5}+41a_{6})\\
+&\quad g_{1}=\tfrac{t}{420}\cdot(-41a_{0}-144a_{1}-9a_{2}+9a_{4}+144a_{5}+41a_{6})\\
+&\quad g_{2}=\tfrac{t}{2100}\cdot(163a_{0}+432a_{1}-675a_{2}+160a_{3}-675a_{4}+432a_{5}+163a_{6})\\
+&\quad g_{3}=\tfrac{t}{140}\cdot(-9a_{0}+27a_{2}-27a_{4}+9a_{6})
+\end{aligned}\label{eq:nc}
+\end{equation}
+
+\end_inset
+The leading quadrature error of 
+\begin_inset Formula $g_0$
+\end_inset
+, 
+\begin_inset Formula $\int_{-t}^{t}A(\tau)\,d\tau-(\text{rule})=\kappa\cdot t^{2n+1}\cdot A^{(2n)}(0)$
+\end_inset
+, has the coefficients in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:kappa"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Leading quadrature-error coefficients 
+\begin_inset Formula $\kappa$
+\end_inset
+ of 
+\begin_inset Formula $g_0$
+\end_inset
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:kappa"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="3">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Order
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gauss-Legendre 
+\begin_inset Formula $\kappa$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Newton-Cotes 
+\begin_inset Formula $\kappa$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $+1/3$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-2/3$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $+1/135$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-1/90$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $+1/15750$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-1/15120$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $+1/3472875$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-1/3061800$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+so the two rules are about equally accurate at each order; they differ in the number of samples (see the algorithm section below).
+\end_layout
+
+\begin_layout Standard
+\emph on
+Gauss-Lobatto quadrature.
+\emph default
+ The Gauss-Lobatto rule with 
+\begin_inset Formula $n+1$
+\end_inset
+ nodes includes both endpoints and is exact for polynomials of degree 
+\begin_inset Formula $2n-1$
+\end_inset
+, so it serves order 
+\begin_inset Formula $2n$
+\end_inset
+. The moments have the form of Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:gauss"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+, with the weights applied to the products 
+\begin_inset Formula $P_k\cdot A$
+\end_inset
+; interpolatory weights through the 
+\begin_inset Formula $n+1$
+\end_inset
+ samples would be exact only for 
+\begin_inset Formula $A$
+\end_inset
+ of degree 
+\begin_inset Formula $n$
+\end_inset
+, which is not enough for 
+\begin_inset Formula $g_1$
+\end_inset
+ when 
+\begin_inset Formula $n\ge3$
+\end_inset
+. For orders 2 and 4 the rule coincides with the Newton-Cotes rule (nodes 
+\begin_inset Formula $\pm1$
+\end_inset
+, and 
+\begin_inset Formula $-1,0,1$
+\end_inset
+, with the same moment weights). For orders 6 and 8 it differs (Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:lobatto"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Gauss-Lobatto nodes and weights for orders 6 and 8.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:lobatto"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="4">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nodes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Order
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nodes 
+\begin_inset Formula $u_i$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Weights 
+\begin_inset Formula $w_i$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\pm1$
+\end_inset
+; 
+\begin_inset Formula $\pm1/\sqrt{5}$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1/12$
+\end_inset
+; 
+\begin_inset Formula $5/12$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\pm1$
+\end_inset
+; 
+\begin_inset Formula $\pm\sqrt{3/7}$
+\end_inset
+; 
+\begin_inset Formula $0$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1/20$
+\end_inset
+; 
+\begin_inset Formula $49/180$
+\end_inset
+; 
+\begin_inset Formula $16/45$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Like the Newton-Cotes rule, it shares its endpoint samples between steps, so it needs only 
+\begin_inset Formula $n$
+\end_inset
+ new samples per step, the same number as the Gauss-Legendre rule, and it also provides 
+\begin_inset Formula $A$
+\end_inset
+ at the step boundaries.
+\end_layout
+
+\begin_layout Standard
+\emph on
+Gauss-Kronrod pairs.
+\emph default
+ For error estimation, the Kronrod extension 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kronrod"
+literal "false"
+\end_inset
+ of the 
+\begin_inset Formula $n$
+\end_inset
+-node Gauss-Legendre rule adds 
+\begin_inset Formula $n+1$
+\end_inset
+ nodes, and the 
+\begin_inset Formula $2n+1$
+\end_inset
+ nodes give a rule exact for polynomials of degree 
+\begin_inset Formula $3n+1$
+\end_inset
+ (
+\begin_inset Formula $n$
+\end_inset
+ even) or 
+\begin_inset Formula $3n+2$
+\end_inset
+ (
+\begin_inset Formula $n$
+\end_inset
+ odd). One set of samples then gives the moments of an order-
+\begin_inset Formula $2n$
+\end_inset
+ formula from the Gauss nodes alone and those of a higher-order formula from all 
+\begin_inset Formula $2n+1$
+\end_inset
+ nodes; the difference of the two results estimates the error of the lower-order result and is a conservative bound for that of the higher-order one. For 
+\begin_inset Formula $n=1$
+\end_inset
+ the Kronrod extension of the midpoint rule is the three-node Gauss-Legendre rule (orders 2 and 6). For 
+\begin_inset Formula $n=2$
+\end_inset
+ the five nodes 
+\begin_inset Formula $0$
+\end_inset
+, 
+\begin_inset Formula $\pm1/\sqrt{3}$
+\end_inset
+ and 
+\begin_inset Formula $\pm\sqrt{6/7}$
+\end_inset
+, with weights 
+\begin_inset Formula $14/45$
+\end_inset
+, 
+\begin_inset Formula $27/110$
+\end_inset
+ and 
+\begin_inset Formula $49/495$
+\end_inset
+ respectively, give a rule of degree 7, so five samples give order-4 and order-8 results with 
+\begin_inset Formula $1+6=7$
+\end_inset
+ commutators. For 
+\begin_inset Formula $n=3$
+\end_inset
+ the seven-node rule (degree 11) serves order 8, and the companion paper 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "j10"
+literal "false"
+\end_inset
+ gives an embedded order-6/order-10 pair on it that reuses the three order-6 commutators. The Kronrod nodes do not include the endpoints, so all 
+\begin_inset Formula $2n+1$
+\end_inset
+ samples are new in each step.
+\end_layout
+
+\begin_layout Section*
+Magnus quadrature formulas
+\end_layout
+
+\begin_layout Standard
+With the moments from a rule of the appropriate order, the Magnus exponent is approximated as follows.
+\end_layout
+
+\begin_layout Standard
+\emph on
+Order 2
+\emph default
+ (no commutators):
+\begin_inset Formula 
+\begin{equation}
+\Omega(t)=g_{0}(t)+O(t^{3})\label{eq:f2}
+\end{equation}
+
+\end_inset
+With one Gauss-Legendre node this is the midpoint rule, 
+\begin_inset Formula $\Omega(t)=2t\cdot A(0)+O(t^3)$
+\end_inset
+; with two Newton-Cotes nodes it is the trapezoid rule, 
+\begin_inset Formula $\Omega(t)=t\cdot(A(-t)+A(t))+O(t^3)$
+\end_inset
+.
+\end_layout
+
+\begin_layout Standard
+\emph on
+Order 4
+\emph default
+ (one commutator):
+\begin_inset Formula 
+\begin{equation}
+\Omega(t)=g_{0}-\tfrac{1}{2}\cdot[g_{0},g_{1}]+O(t^{5})\label{eq:f4}
+\end{equation}
+
+\end_inset
+In terms of samples, with Gauss-Legendre nodes (
+\begin_inset Formula $a_\pm=A(\pm t/\sqrt{3})$
+\end_inset
+) and with Newton-Cotes nodes, respectively,
+\begin_inset Formula 
+\begin{equation}
+\begin{aligned}
+\Omega(t)&=t\cdot(a_{-}+a_{+})-\tfrac{t^{2}}{\sqrt{3}}\cdot[a_{-},a_{+}]+O(t^{5})\\
+\Omega(t)&=\tfrac{t}{3}\cdot(A(-t)+4\cdot A(0)+A(t))-\tfrac{t^{2}}{3}\cdot[A(0),A(t)-A(-t)]+O(t^{5})
+\end{aligned}\label{eq:f4s}
+\end{equation}
+
+\end_inset
+(The second form differs from Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:f4"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ with the moments of Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:nc"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ by terms of order 
+\begin_inset Formula $t^5$
+\end_inset
+.)
+\end_layout
+
+\begin_layout Standard
+\emph on
+Order 6
+\emph default
+ (three commutators):
+\begin_inset Formula 
+\begin{equation}
+\begin{aligned}
+C_{1}&=\big[g_{0},\ g_{1}\big]\\
+C_{2}&=\big[g_{0},\ g_{2}+\tfrac{1}{10}C_{1}\big]\\
+C_{3}&=\big[g_{0}-g_{2}-\tfrac{3}{10}C_{1},\ g_{1}-\tfrac{1}{6}C_{2}\big]\\
+\Omega(t)&=g_{0}-\tfrac{1}{2}C_{3}+O(t^{7})
+\end{aligned}\label{eq:f6}
+\end{equation}
+
+\end_inset
+\end_layout
+
+\begin_layout Standard
+\emph on
+Order 8
+\emph default
+ (six commutators):
+\begin_inset Formula 
+\begin{equation}
+\begin{aligned}
+C_{1}&=\big[-\tfrac{1}{2}g_{0}+\tfrac{5}{7}g_{2},\ g_{1}-g_{3}\big]\\
+C_{2}&=\big[g_{0}-\tfrac{5}{2}g_{2},\ 5g_{2}-C_{1}\big]\\
+C_{3}&=\big[\tfrac{1}{2}g_{0}-\tfrac{5}{7}g_{2}+\tfrac{3}{14}C_{1},\ -2g_{1}+2g_{3}+\tfrac{1}{21}C_{2}\big]\\
+C_{4}&=\big[\tfrac{3}{14}C_{1},\ -g_{1}+\tfrac{7}{2}g_{3}\big]\\
+C_{5}&=\big[2g_{0}-5g_{2}+\tfrac{15}{14}C_{1},\ 10g_{2}-C_{3}+C_{4}\big]\\
+C_{6}&=\big[g_{0}-C_{1}+C_{3},\ 3g_{1}+7g_{3}+\tfrac{1}{2}C_{2}-\tfrac{1}{6}C_{5}\big]\\
+\Omega(t)&=g_{0}+\tfrac{7}{20}C_{3}-\tfrac{1}{20}C_{6}+O(t^{9})
+\end{aligned}\label{eq:f8}
+\end{equation}
+
+\end_inset
+Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:f8"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ is the scheme of Blanes, Casas and Ros 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2002"
+literal "false"
+\end_inset
+ rewritten in Legendre moments, with the commutator operands rescaled to simplify the coefficients. All coefficients in Eqs. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:f2"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+-
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:f8"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ are exact rationals. Each formula was verified in exact rational arithmetic, by expanding it in the free algebra generated by the moments and comparing every term through weight 
+\begin_inset Formula $2n$
+\end_inset
+ with Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:target"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+, both with exact moments and with the moments of all the quadrature rules above (those with irrational nodes in floating-point or high-precision arithmetic).
+\end_layout
+
+\begin_layout Section*
+The Magnus quadrature algorithm
+\end_layout
+
+\begin_layout Standard
+One integration step of length 
+\begin_inset Formula $h=2t$
+\end_inset
+, from 
+\begin_inset Formula $t_c-t$
+\end_inset
+ to 
+\begin_inset Formula $t_c+t$
+\end_inset
+, proceeds as follows (with 
+\begin_inset Formula $A(\tau)$
+\end_inset
+ replaced by 
+\begin_inset Formula $A(t_c+\tau)$
+\end_inset
+ in the preceding sections):
+\end_layout
+
+\begin_layout Enumerate
+Sample 
+\begin_inset Formula $A(t_c+u_i\cdot t)$
+\end_inset
+ at the nodes of the chosen rule: the 
+\begin_inset Formula $n$
+\end_inset
+ Gauss-Legendre nodes, the 
+\begin_inset Formula $2n+1$
+\end_inset
+ Gauss-Kronrod nodes, or the Newton-Cotes or Gauss-Lobatto nodes, whose first sample is the last sample of the previous step.
+\end_layout
+
+\begin_layout Enumerate
+Form the moments 
+\begin_inset Formula $g_0,\ldots,g_{n-1}$
+\end_inset
+ from Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:gauss"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+, with the nodes and weights of the chosen Gauss-type rule, or from Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:nc"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+.
+\end_layout
+
+\begin_layout Enumerate
+Evaluate the commutators and 
+\begin_inset Formula $\Omega(t)$
+\end_inset
+ from the formula of the chosen order (Eqs. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:f2"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+-
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:f8"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+).
+\end_layout
+
+\begin_layout Enumerate
+Advance the solution, 
+\begin_inset Formula $F(t_c+t)=\exp(\Omega(t))\cdot F(t_c-t)$
+\end_inset
+, with the matrix exponential evaluated by a standard method (for example, scaling and squaring), or with its action on 
+\begin_inset Formula $F$
+\end_inset
+ evaluated directly.
+\end_layout
+
+\begin_layout Standard
+\noindent
+The cost per step (Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:cost"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+) is one matrix exponential or its action, the commutators (two matrix products each), and the samples of 
+\begin_inset Formula $A$
+\end_inset
+. When 
+\begin_inset Formula $A$
+\end_inset
+ is skew-Hermitian (as for the Schrödinger equation) or real skew-symmetric, the moments and all commutators are too, so every operand is skew-Hermitian and 
+\begin_inset Formula $Y\cdot X=(X\cdot Y)^{\dagger}$
+\end_inset
+; each commutator then needs only one matrix product. The same holds for Hamiltonian 
+\begin_inset Formula $A$
+\end_inset
+, with 
+\begin_inset Formula $Y\cdot X=-J\cdot(X\cdot Y)^{T}\cdot J$
+\end_inset
+ for the symplectic matrix 
+\begin_inset Formula $J$
+\end_inset
+. (It does not hold for Hermitian or symmetric 
+\begin_inset Formula $A$
+\end_inset
+, because their commutators are not Hermitian or symmetric.)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Commutators, matrix products and samples of 
+\begin_inset Formula $A$
+\end_inset
+ per step.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:cost"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="6">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Order
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Commutators
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Matrix
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Samples per step
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+products
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gauss-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Newton-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gauss-
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Legendre
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Cotes (new)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Lobatto (new)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The entries marked (new) in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:cost"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ count new evaluations of 
+\begin_inset Formula $A$
+\end_inset
+. In a multi-step integration each step reuses the sample at the boundary it shares with the previous step, so the number of new evaluations per step is one less than the number of quadrature nodes. With this reuse the Gauss-Lobatto rule needs no more evaluations than the Gauss-Legendre rule. A Gauss-Kronrod pair needs 
+\begin_inset Formula $2n+1$
+\end_inset
+ new evaluations per step.
+\end_layout
+
+\begin_layout Standard
+In adaptive integration, where a step is split into two half-steps when its error estimate is too large, the Newton-Cotes rule has a further advantage. The nodes of the two half-steps include all the nodes of the original step, so half of the samples they need are already available, and the number of new evaluations is reduced by a factor of two: 
+\begin_inset Formula $2n-2$
+\end_inset
+ instead of 
+\begin_inset Formula $4n-4$
+\end_inset
+ for order 
+\begin_inset Formula $2n\ge4$
+\end_inset
+. The Gauss-Legendre nodes are not reused after splitting, and the Gauss-Lobatto rule reuses only the endpoints and, with five nodes, the midpoint; splitting a step then costs 5 and 6 new evaluations at orders 6 and 8 with Gauss-Lobatto nodes, compared with 4 and 6 with Newton-Cotes nodes and 6 and 8 with Gauss-Legendre nodes.
+\end_layout
+
+\begin_layout Section*
+Results
+\end_layout
+
+\begin_layout Standard
+The formulas were tested on three 
+\begin_inset Formula $4\times4$
+\end_inset
+ matrix polynomials 
+\begin_inset Formula $A(\tau)=\sum_{k=0}^{12}C_k\cdot\tau^k$
+\end_inset
+, with 
+\begin_inset Formula $C_k=s\cdot d^k\cdot N_k$
+\end_inset
+, where the 
+\begin_inset Formula $N_k$
+\end_inset
+ are standard normal random matrices (NumPy default_rng with the stated seed), and parameters (seed, 
+\begin_inset Formula $s$
+\end_inset
+, 
+\begin_inset Formula $d$
+\end_inset
+) of 
+\begin_inset Formula $(42,1,0.8)$
+\end_inset
+ (random), 
+\begin_inset Formula $(9,2,0.5)$
+\end_inset
+ (commutator-heavy) and 
+\begin_inset Formula $(7,0.3,1.5)$
+\end_inset
+ (rapidly varying relative to its non-commutativity). The reference is 
+\begin_inset Formula $\Omega(t)=\log(V(t)\cdot V(-t)^{-1})$
+\end_inset
+, Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:uv"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+, with 
+\begin_inset Formula $V$
+\end_inset
+ from its Taylor series. Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:results"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ lists the error in 
+\begin_inset Formula $\Omega(t)$
+\end_inset
+ (Frobenius norm) for half-steps 
+\begin_inset Formula $t=0.1$
+\end_inset
+ and 
+\begin_inset Formula $t=0.05$
+\end_inset
+, and the error ratio between 
+\begin_inset Formula $t=0.1$
+\end_inset
+ and 
+\begin_inset Formula $t=0.05$
+\end_inset
+ for the random test:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Errors in 
+\begin_inset Formula $\Omega(t)$
+\end_inset
+ (Frobenius norm) for the three test problems.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:results"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="17" columns="9">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Order
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Moments
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Random
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Comm.-heavy
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Rapid
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ratio
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $t=0.1$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $t=0.05$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $t=0.1$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $t=0.05$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $t=0.1$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $t=0.05$
+\end_inset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gauss-Legendre, 1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.1e-03
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.1e-04
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.7e-02
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.1e-03
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.4e-03
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.7e-04
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Newton-Cotes, 2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.2e-03
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.2e-04
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.8e-02
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.3e-03
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.2e-03
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.0e-04
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+exact moments
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.8e-03
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.8e-04
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.7e-02
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.1e-03
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.1e-04
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.4e-05
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gauss-Legendre, 2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.9e-05
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.2e-06
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.2e-04
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.0e-05
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.1e-05
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.6e-07
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+32
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Newton-Cotes, 3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.5e-05
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.1e-06
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.3e-04
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.0e-05
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.5e-05
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.8e-07
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+32
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+exact moments
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.7e-05
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.2e-06
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.2e-04
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.0e-05
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.4e-06
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.1e-07
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+32
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gauss-Legendre, 3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.3e-07
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.1e-09
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.6e-05
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.9e-07
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.9e-08
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.3e-10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+127
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Newton-Cotes, 5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.4e-07
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.2e-09
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.6e-05
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.9e-07
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7.1e-08
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.5e-10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+127
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gauss-Lobatto, 4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.5e-07
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.3e-09
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.6e-05
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.9e-07
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9.4e-08
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7.3e-10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+127
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+exact moments
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.4e-07
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.2e-09
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.6e-05
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.9e-07
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.8e-08
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.4e-10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+127
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gauss-Legendre, 4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.7e-09
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.3e-11
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.9e-06
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.8e-09
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.9e-10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7.7e-13
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+508
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Newton-Cotes, 7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.7e-09
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.3e-11
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.9e-06
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.8e-09
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.7e-10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9.3e-13
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+508
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gauss-Lobatto, 5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.6e-09
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.3e-11
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.9e-06
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.8e-09
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.1e-10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.0e-12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+508
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gauss-Kronrod, 5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.7e-09
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.3e-11
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.9e-06
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.8e-09
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.5e-10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.9e-13
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+508
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+exact moments
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.7e-09
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.3e-11
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.9e-06
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.8e-09
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.4e-11
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.3e-13
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+508
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Halving 
+\begin_inset Formula $t$
+\end_inset
+ reduces the error by factors approaching 
+\begin_inset Formula $2^{2n+1}=8$
+\end_inset
+, 32, 128 and 512, confirming the residual orders. In the first two tests all the quadrature rules give errors within about 10% of those with exact moments. In the rapidly varying test the quadrature error of 
+\begin_inset Formula $g_0$
+\end_inset
+ dominates; there the Gauss-Legendre, Newton-Cotes and Gauss-Lobatto rules remain within a factor of about 1.4 of each other at orders 4-8 (2.3 at order 2), the five-node Gauss-Kronrod rule is about 2.6 times more accurate than the four-node Gauss-Legendre rule at order 8, and exact moments would be 3-6 times more accurate. In all three tests the Gauss-Kronrod error estimate for order 4 (the difference between the order-8 result with five Kronrod nodes and the order-4 result with the two Gauss nodes) agrees with the actual order-4 error to within about 3%.
+\end_layout
+
+\begin_layout Section*
+Comparison with Blanes et al.
+\end_layout
+
+\begin_layout Standard
+Blanes, Casas and Ros 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2000"
+literal "false"
+\end_inset
+ introduced Magnus integrators built from univariate moments of 
+\begin_inset Formula $A$
+\end_inset
+ (the integrals 
+\begin_inset Formula $B^{(i)}$
+\end_inset
+ below) with 
+\begin_inset Formula $A$
+\end_inset
+ expanded about the midpoint of the step, giving schemes of orders 4, 6 and 8 with 1, 4 and 10 commutators, evaluated with either Gauss-Legendre or Newton-Cotes quadrature. In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2002"
+literal "false"
+\end_inset
+ they reduced the commutator counts to 1, 3 and 6, by optimizing in a graded free Lie algebra, and stated that these are the minimum numbers; for order 8 they showed that their five-commutator ansatz has no real solution. Their order-8 scheme is the only published one of that order known to us. The review by Blanes, Casas, Oteo and Ros 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcor2009"
+literal "false"
+\end_inset
+ presents the same framework, with explicit order-4 and order-6 schemes for both Gauss-Legendre and Newton-Cotes nodes (its Eqs. 251-258), and cites the six-commutator order-8 scheme. The present formulation differs from theirs in the following respects.
+\end_layout
+
+\begin_layout Standard
+\emph on
+Formulation.
+\emph default
+ Ref. 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcor2009"
+literal "false"
+\end_inset
+ writes the solution over a step in the centered form 
+\begin_inset Formula $Y(t_{1/2}+s/2)=\exp(\Omega(t_{1/2}+s/2,t_{1/2}-s/2))\cdot Y(t_{1/2}-s/2)$
+\end_inset
+ (its Eq. 63), which is Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:centered"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ with 
+\begin_inset Formula $s=2t$
+\end_inset
+, and uses it to establish the time symmetry; the integrators are then derived from the conventional Magnus equation over 
+\begin_inset Formula $[t_n,t_n+h]$
+\end_inset
+ with 
+\begin_inset Formula $A$
+\end_inset
+ expanded about the midpoint. Here the centered relation is the starting point: the propagator equation (Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:uode"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+) and the centered Magnus theorem (Eqs. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:theorem"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:evenodd"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+) are written directly for the centered interval, so the time symmetry (
+\begin_inset Formula $U(-t)=U(t)^{-1}$
+\end_inset
+, Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:uinv"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+; 
+\begin_inset Formula $\Omega(t)$
+\end_inset
+ odd, Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:odd"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+) is built into the differential equation, which separates the even and odd parts of 
+\begin_inset Formula $A$
+\end_inset
+. We have not found the centered differential equation in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2000"
+literal "false"
+\end_inset
+, 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2002"
+literal "false"
+\end_inset
+ or 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcor2009"
+literal "false"
+\end_inset
+. The resulting series is the same as theirs.
+\end_layout
+
+\begin_layout Standard
+\emph on
+Moments.
+\emph default
+ Ref. 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2002"
+literal "false"
+\end_inset
+ uses the moments 
+\begin_inset Formula $B^{(i)}=h^{-i}\int(\tau-t_{n}-h/2)^{i}\cdot A(\tau)\,d\tau$
+\end_inset
+ over the step, which in the centered notation are 
+\begin_inset Formula $B^{(i)}=(2t)^{-i}\int_{-t}^{t}\tau^{i}\cdot A(\tau)\,d\tau$
+\end_inset
+ (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2000"
+literal "false"
+\end_inset
+ divides by an extra factor 
+\begin_inset Formula $h$
+\end_inset
+, and 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcor2009"
+literal "false"
+\end_inset
+ calls them 
+\begin_inset Formula $A^{(i)}$
+\end_inset
+). In Legendre moments,
+\begin_inset Formula 
+\begin{equation}
+B^{(0)}=g_{0},\quad B^{(1)}=\tfrac{1}{2}\cdot g_{1},\quad B^{(2)}=\tfrac{1}{6}\cdot(g_{2}+\tfrac{1}{2}\cdot g_{0}),\quad B^{(3)}=\tfrac{1}{20}\cdot(g_{3}+\tfrac{3}{2}\cdot g_{1})\label{eq:bmom}
+\end{equation}
+
+\end_inset
+The schemes of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2002"
+literal "false"
+\end_inset
+ and 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcor2009"
+literal "false"
+\end_inset
+ are derived in the free Lie algebra generated by the midpoint Taylor terms 
+\begin_inset Formula $b_i=h^{i}A^{(i-1)}(t_{1/2})/(i-1)!$
+\end_inset
+ (denoted 
+\begin_inset Formula $\alpha_i$
+\end_inset
+ in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcor2009"
+literal "false"
+\end_inset
+), and the 
+\begin_inset Formula $b_i$
+\end_inset
+ are then replaced by linear combinations of the 
+\begin_inset Formula $B^{(i)}$
+\end_inset
+ that agree with them to the order considered. For order 6 these combinations are 
+\begin_inset Formula $g_0-\frac{5}{2}g_2$
+\end_inset
+, 
+\begin_inset Formula $6g_1$
+\end_inset
+ and 
+\begin_inset Formula $30g_2$
+\end_inset
+, which are close to Legendre moments. Here the formulas are derived and verified directly in the Legendre moments, in which they hold exactly with no truncated change of variables. The orthogonality of the 
+\begin_inset Formula $P_k$
+\end_inset
+ gives Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:target"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ its simple structure (only 
+\begin_inset Formula $g_0$
+\end_inset
+ outside commutators, and only 
+\begin_inset Formula $g_0,\ldots,g_{n-1}$
+\end_inset
+ through order 
+\begin_inset Formula $2n$
+\end_inset
+) and gives the simple accuracy criterion for the quadrature in the moment-quadrature section.
+\end_layout
+
+\begin_layout Standard
+\emph on
+Formulas.
+\emph default
+ At order 4 the formulas coincide with those of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2000"
+literal "false"
+\end_inset
+, 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2002"
+literal "false"
+\end_inset
+ and 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcor2009"
+literal "false"
+\end_inset
+. At order 6, Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:f6"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ uses three commutators like 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2002"
+literal "false"
+\end_inset
+, Eqs. 3.5-3.7, but has a single term in the final sum, and its leading-error coefficients (the weight-7 residual, with each moment scaled by its leading size) have an 11% smaller norm; on the test problems the two agree to within about 10%. At order 8, Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:f8"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ is the scheme of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2002"
+literal "false"
+\end_inset
+ (its Eqs. 3.8-3.10). A search over all six-commutator patterns, which goes beyond the single ansatz of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2002"
+literal "false"
+\end_inset
+, found six families of solutions with 5 to 12 free parameters each. Minimizing the leading error over the families reduced that norm by a factor of about 1.8 below the scheme of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2002"
+literal "false"
+\end_inset
+, but gave no improvement on the test problems, and the optimized coefficients are not simple numbers; the published order-8 scheme is therefore effectively optimal. (The optimization in the title of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2002"
+literal "false"
+\end_inset
+ refers to the number of commutators, not to the leading error.)
+\end_layout
+
+\begin_layout Standard
+\emph on
+Quadrature.
+\emph default
+ As in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2000"
+literal "false"
+\end_inset
+ and 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcor2009"
+literal "false"
+\end_inset
+, the moments can be computed with either Gauss-Legendre or Newton-Cotes nodes, and the Newton-Cotes endpoint sample can be reused in the next step. Ref. 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2000"
+literal "false"
+\end_inset
+ gives Newton-Cotes moment formulas for orders 6 and 8 and 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcor2009"
+literal "false"
+\end_inset
+ for orders 4 and 6, obtained by applying the Newton-Cotes rule to the products of 
+\begin_inset Formula $A$
+\end_inset
+ with powers of the time variable; Eq. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:nc"
+plural "false"
+caps "false"
+noprefix "false"
+\end_inset
+ gives interpolatory weights for all four orders, and the moment-quadrature section gives the general accuracy criterion (any rule of polynomial degree 
+\begin_inset Formula $2n-1$
+\end_inset
+ suffices for order 
+\begin_inset Formula $2n$
+\end_inset
+). The Gauss-Lobatto and Gauss-Kronrod rules given here are not used in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2000"
+literal "false"
+\end_inset
+, 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2002"
+literal "false"
+\end_inset
+ or 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcor2009"
+literal "false"
+\end_inset
+. The results agree with the observation in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bcr2002"
+literal "false"
+\end_inset
+ that exact moments can be considerably more accurate than quadrature moments for some problems: in the rapidly varying test, exact moments are 3-6 times more accurate.
+\end_layout
+
+\begin_layout Standard
+\emph on
+Verification.
+\emph default
+ Every formula here was checked in exact rational arithmetic, and the Legendre-moment series itself was derived from the centered Magnus theorem and cross-checked against the conventional midpoint expansion.
+\end_layout
+
+\begin_layout Section*
+Code availability
+\end_layout
+
+\begin_layout Standard
+MATLAB implementations of the formulas (explde.m, magnus_exp.m and magnus10coef.m), these documents and their LyX and LaTeX sources are available at 
+\begin_inset CommandInset href
+LatexCommand href
+name "https://github.com/kjinnovation/explde"
+target "https://github.com/kjinnovation/explde"
+literal "false"
+\end_inset
+ and on MATLAB File Exchange, 
+\begin_inset CommandInset href
+LatexCommand href
+name "https://www.mathworks.com/matlabcentral/fileexchange/183695-explde"
+target "https://www.mathworks.com/matlabcentral/fileexchange/183695-explde"
+literal "false"
+\end_inset
+.
+\end_layout
+
+\begin_layout Section*
+Acknowledgment
+\end_layout
+
+\begin_layout Standard
+This work was carried out with the assistance of Claude Opus 5.5 (Anthropic), a large language model. Under the author's direction, Claude derived the Magnus series in Legendre moments, searched for minimal-commutator formulas and optimized their leading error, and drafted portions of the text.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "bcr2000"
+literal "false"
+
+\end_inset
+
+S. Blanes, F. Casas, J. Ros, “Improved high order integrators based on the Magnus expansion,” 
+\emph on
+BIT Numerical Mathematics
+\emph default
+ 40 (2000) 434-450.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "bcr2002"
+literal "false"
+
+\end_inset
+
+S. Blanes, F. Casas, J. Ros, “High order optimized geometric integrators for linear differential equations,” 
+\emph on
+BIT Numerical Mathematics
+\emph default
+ 42 (2002) 262-284.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "bcor2009"
+literal "false"
+
+\end_inset
+
+S. Blanes, F. Casas, J. A. Oteo, J. Ros, “The Magnus expansion and some of its applications,” 
+\emph on
+Physics Reports
+\emph default
+ 470 (2009) 151-238. 
+\begin_inset CommandInset href
+LatexCommand href
+name "https://doi.org/10.1016/j.physrep.2008.11.001"
+target "https://doi.org/10.1016/j.physrep.2008.11.001"
+literal "false"
+\end_inset
+, 
+\begin_inset CommandInset href
+LatexCommand href
+name "https://arxiv.org/abs/0810.5488"
+target "https://arxiv.org/abs/0810.5488"
+literal "false"
+\end_inset
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "j10"
+literal "false"
+
+\end_inset
+
+K. C. Johnson, “Magnus quadrature formulas of order 10 on a centered interval,” Version 02-Nov-2026, magnus_order_10.pdf, 
+\begin_inset CommandInset href
+LatexCommand href
+name "https://github.com/kjinnovation/explde"
+target "https://github.com/kjinnovation/explde"
+literal "false"
+\end_inset
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "kronrod"
+literal "false"
+
+\end_inset
+
+A. S. Kronrod, 
+\emph on
+Nodes and Weights of Quadrature Formulas: Sixteen-Place Tables
+\emph default
+, Consultants Bureau, New York, 1965.
+\end_layout
+
+\end_body
+\end_document
