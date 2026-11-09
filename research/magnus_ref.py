@@ -1,17 +1,21 @@
 """magnus_ref.py -- reference implementation for centered Magnus quadrature in Legendre moments.
 
 Companion code for
-  [1] K. C. Johnson, "The centered Magnus exponent and Magnus quadrature formulas of orders 2, 4, 6
-      and 8," Version 02-Nov-2026 (magnus_order_2-8.pdf).
+  [1] K. C. Johnson, "The Centered Magnus Exponent and Magnus Quadrature Formulas of Orders 2, 4, 6
+      and 8," Version 09-Nov-2026, magnus_order_2-8.pdf, https://ai.vixra.org/abs/2611.0005
   [2] K. C. Johnson, "Magnus quadrature formulas of order 10 on a centered interval,"
-      Version 02-Nov-2026 (magnus_order_10.pdf); coefficients in magnus10coef.m.
+      Version 09-Nov-2026, magnus_order_10.pdf, https://ai.vixra.org/abs/2611.0004;
+      coefficients in magnus10coef.m.
+  Introductory tutorial: K. C. Johnson, "Quadrature approximation to the Magnus exponent for
+      numerical solution of non-autonomous coupled linear differential equations,"
+      Version 09-Nov-2026, explde.pdf, https://vixra.org/abs/2604.0065
 Repository: https://github.com/kjinnovation/explde
 Written with the assistance of Claude Opus 5.5 (Anthropic).
 
 What it does (pure Python, exact rational arithmetic with fractions.Fraction):
   1. centered_series(D): the Magnus exponent Omega(t) through t^D in centered Legendre moments g_k,
-     derived from the centered Magnus theorem ([1], Eq. 34).
-  2. lie_decompose(): rewrite a Lie polynomial in the Lyndon basis (as printed in [1], Eq. 41).
+     derived from the centered Magnus theorem ([1], Eq. 6).
+  2. lie_decompose(): rewrite a Lie polynomial in the Lyndon basis (as printed in [1], Eq. 9).
   3. evaluate(): expand a nested-commutator formula in the free algebra of the moments, so that it can
      be compared word by word with the series (the exact verification used in [1] and [2]).
   4. quad_moments(): express quadrature moments in exact moments, to verify a quadrature rule.
@@ -144,7 +148,7 @@ def evaluate(formula,G,W):
     return out
 def letter(k): return {(k,):F(1)}
 def quad_moments(nodes,W_k,M):
-    """Moments of a rule g_k ~ 2t*sum_i W_k[i] A(u_i t) (as in [1], Eq. 42, where W_k[i] = w_i P_k(u_i)
+    """Moments of a rule g_k ~ 2t*sum_i W_k[i] A(u_i t) (as in [1], Eq. 10, where W_k[i] = w_i P_k(u_i)
     with sum_i w_i = 1), expressed in exact moments g_0..g_{M-1} (exact when the u_i, W_k[i] are rational)."""
     G=[]
     for Wk in W_k:

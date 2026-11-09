@@ -12,11 +12,12 @@ Also on MATLAB File Exchange: https://www.mathworks.com/matlabcentral/fileexchan
 |---|---|
 | `explde.m` | Solver: `F = explde(A,t,ord,F0)` for constant A (array) or variable A (function handle) |
 | `magnus_exp.m` | Magnus exponent over one step, orders 2, 4, 6, 8, 10 (used by explde) |
-| `magnus10coef.m` | Coefficients of the order-10 formulas (`[x,y] = magnus10coef()`) |
+| `magnus10coef.m` | Reference coefficients for the order-10 formulas (`[x,y] = magnus10coef()`) |
 | `demo_explde.m` | Examples: constant A, and a variable-A test case with an exact solution |
+| `docs/explde.pdf` | Quadrature approximation to the Magnus exponent (tutorial introduction; order-6, 3-commutator derivation) |
 | `docs/magnus_order_2-8.pdf` | The centered Magnus exponent and Magnus quadrature formulas of orders 2, 4, 6 and 8 |
 | `docs/magnus_order_10.pdf` | Magnus quadrature formulas of order 10 on a centered interval |
-| `docs/*.lyx`, `docs/*.tex` | LyX and LaTeX sources of the two documents |
+| `docs/explde.docx`, `docs/*.lyx`, `docs/*.tex` | docx, LyX, LaTeX sources of the pdf documents |
 | `research/Magnus_quadrature_research_guide.md` | How the formulas were derived and verified, and how to continue the research |
 | `research/magnus_ref.py` | Python reference code (exact rational arithmetic) for the series and formula verification |
 
@@ -25,7 +26,7 @@ Also on MATLAB File Exchange: https://www.mathworks.com/matlabcentral/fileexchan
 - MATLAB R2020b or later (uses `pagemtimes`).
 - `pageexpm` from MATLAB File Exchange: https://www.mathworks.com/matlabcentral/fileexchange/107959-pageexpm
 
-Put `explde.m`, `magnus_exp.m`, `magnus10coef.m` and `pageexpm.m` on the MATLAB path.
+Put `explde.m`, `magnus_exp.m` and `pageexpm.m` on the MATLAB path.
 
 ## Quick start
 
@@ -62,7 +63,11 @@ The documents in `docs/` give the derivation, the formulas, the alternative quad
 
 ## Citation
 
-K. C. Johnson, "The centered Magnus exponent and Magnus quadrature formulas of orders 2, 4, 6 and 8," and "Magnus quadrature formulas of order 10 on a centered interval," https://github.com/kjinnovation/explde
+K. C. Johnson, "Quadrature approximation to the Magnus exponent for numerical solution of non-autonomous coupled linear differential equations," Version 09-Nov-2026, explde.pdf, https://github.com/kjinnovation/explde, https://vixra.org/abs/2604.0065
+
+K. C. Johnson, "The Centered Magnus Exponent and Magnus Quadrature Formulas of Orders 2, 4, 6 and 8," Version 09-Nov-2026, magnus_order_2-8.pdf, https://github.com/kjinnovation/explde, https://ai.vixra.org/abs/2611.0005
+
+K. C. Johnson, "Magnus quadrature formulas of order 10 on a centered interval," Version 09-Nov-2026, magnus_order_10.pdf, https://github.com/kjinnovation/explde, https://ai.vixra.org/abs/2611.0004
 
 ## License
 

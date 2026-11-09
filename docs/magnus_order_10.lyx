@@ -6,6 +6,7 @@
 \origin unavailable
 \textclass article
 \begin_preamble
+\usepackage{xurl}
 \setlength{\abovecaptionskip}{0pt}\setlength{\belowcaptionskip}{6pt}
 \end_preamble
 \use_default_options true
@@ -96,7 +97,16 @@ ken@kjinnovation.com
 \end_layout
 
 \begin_layout Date
-Version 02-Nov-2026
+Version 09-Nov-2026
+\begin_inset Newline newline
+\end_inset
+
+\begin_inset CommandInset href
+LatexCommand href
+name "https://ai.vixra.org/abs/2611.0004"
+target "https://ai.vixra.org/abs/2611.0004"
+literal "false"
+\end_inset
 \end_layout
 
 \begin_layout Section*
@@ -111,7 +121,13 @@ LatexCommand cite
 key "j28"
 literal "false"
 \end_inset
- to order 10 (residual error 
+ (which builds on the introductory tutorial 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "jtut"
+literal "false"
+\end_inset
+) to order 10 (residual error 
 \begin_inset Formula $O(t^{11})$
 \end_inset
  over the interval 
@@ -131,10 +147,16 @@ Notation and order conditions
 The notation follows 
 \begin_inset CommandInset citation
 LatexCommand cite
+key "jtut"
+literal "false"
+\end_inset
+ and 
+\begin_inset CommandInset citation
+LatexCommand cite
 key "j28"
 literal "false"
 \end_inset
-. The Magnus exponent 
+, and the definitions and introductory material given there (the centered formulation, the centered Magnus theorem, and the Legendre polynomials) are not repeated. The Magnus exponent 
 \begin_inset Formula $\Omega(t)$
 \end_inset
  propagates the solution from 
@@ -150,7 +172,7 @@ g_{k}(t)=\int_{-t}^{t}P_{k}(\tau/t)\cdot A(\tau)\,d\tau\label{eq:gdef}
 \end{equation}
 
 \end_inset
-(Eq. 35 of 
+(Eq. 7 of 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "j28"
@@ -162,14 +184,20 @@ literal "false"
  is 
 \begin_inset Formula $O(t^{k+1})$
 \end_inset
- and has 
+, and we call 
+\begin_inset Formula $k+1$
+\end_inset
+ its 
 \emph on
 weight
 \emph default
- 
-\begin_inset Formula $k+1$
+ (aka order); a term of weight 
+\begin_inset Formula $n$
 \end_inset
-; 
+ is 
+\begin_inset Formula $O(t^n)$
+\end_inset
+ and the weight of a product is the sum of its factors' weights. 
 \begin_inset Formula $g_0$
 \end_inset
 , 
@@ -193,13 +221,13 @@ weight
  contains only odd weights. The series of 
 \begin_inset Formula $\Omega$
 \end_inset
- in the moments, derived from the centered Magnus theorem (Eq. 34 of 
+ in the moments, derived from the centered Magnus theorem (Eq. 6 of 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "j28"
 literal "false"
 \end_inset
-) in exact rational arithmetic, is given through weight 7 in Eq. 41 of 
+) in exact rational arithmetic, is given through weight 7 in Eq. 9 of 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "j28"
@@ -263,7 +291,7 @@ plural "false"
 caps "false"
 noprefix "false"
 \end_inset
-, which extends Table 2 of 
+, which extends Table 1 of 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "j28"
@@ -1242,7 +1270,7 @@ Gauss-Legendre, five nodes.
  
 \begin_inset Formula $g_k\approx 2t\cdot\sum_i w_i\cdot P_k(u_i)\cdot A(u_i\cdot t)$
 \end_inset
- (Eq. 42 of 
+ (Eq. 10 of 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "j28"
@@ -1259,7 +1287,7 @@ plural "false"
 caps "false"
 noprefix "false"
 \end_inset
-, which extends Table 3 of 
+, which extends Table 2 of 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "j28"
@@ -1496,7 +1524,7 @@ plural "false"
 caps "false"
 noprefix "false"
 \end_inset
-, which extends Table 5 of 
+, which extends Table 4 of 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "j28"
@@ -1800,7 +1828,7 @@ plural "false"
 caps "false"
 noprefix "false"
 \end_inset
-, which extends Table 4 of 
+, which extends Table 3 of 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "j28"
@@ -2217,10 +2245,16 @@ M_{6}&=h_{0}-\tfrac{14}{5}D_{1}+\tfrac{3}{10}D_{3}+O(t^{7})
 \end{equation}
 
 \end_inset
-which is an order-6 formula in the Gauss moments, equivalent to Eq. 47 of 
+which is an order-6 formula in the Gauss moments, equivalent to Eq. 15 of 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "j28"
+literal "false"
+\end_inset
+ and to the order-6 formula derived in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "jtut"
 literal "false"
 \end_inset
 .
@@ -2383,7 +2417,7 @@ plural "false"
 caps "false"
 noprefix "false"
 \end_inset
-, which extends Table 6 of 
+, which extends Table 5 of 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "j28"
@@ -2709,7 +2743,7 @@ noprefix "false"
  and 
 \begin_inset Formula $t=0.05$
 \end_inset
- for the random test. The table has the format of Table 7 of 
+ for the random test. The table has the format of Table 6 of 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "j28"
@@ -2738,7 +2772,7 @@ LatexCommand cite
 key "j28"
 literal "false"
 \end_inset
- with four Gauss-Legendre nodes (Table 7 of 
+ with four Gauss-Legendre nodes (Table 6 of 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "j28"
@@ -3804,7 +3838,13 @@ plural "false"
 caps "false"
 noprefix "false"
 \end_inset
- as column vectors, in the order of Appendices A and B. Rational coefficients are written as exact fractions and irrational ones to 30 significant digits.
+ as column vectors, in the order of Appendices A and B. Rational coefficients are written as exact fractions and irrational ones to 30 significant digits. The coefficients 
+\begin_inset Formula $x_k$
+\end_inset
+ are also written into magnus_exp.m, which computes 
+\begin_inset Formula $\Omega$
+\end_inset
+ for explde.m and does not require magnus10coef.m.
 \end_layout
 
 \begin_layout Section*
@@ -3812,21 +3852,42 @@ Code availability
 \end_layout
 
 \begin_layout Standard
-MATLAB implementations of the formulas (explde.m, magnus_exp.m and magnus10coef.m), these documents and their LyX and LaTeX sources are available at 
+Documentation, code and research resources are available in the GitHub repository 
 \begin_inset CommandInset href
 LatexCommand href
 name "https://github.com/kjinnovation/explde"
 target "https://github.com/kjinnovation/explde"
 literal "false"
 \end_inset
- and on MATLAB File Exchange, 
+, and the code also on MATLAB File Exchange, 
 \begin_inset CommandInset href
 LatexCommand href
 name "https://www.mathworks.com/matlabcentral/fileexchange/183695-explde"
 target "https://www.mathworks.com/matlabcentral/fileexchange/183695-explde"
 literal "false"
 \end_inset
-.
+. The MATLAB function explde.m solves 
+\begin_inset Formula $F'(t)=A(t)\cdot F(t)$
+\end_inset
+ with the formulas of orders 2 to 10 of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "j28"
+literal "false"
+\end_inset
+ and this paper, using Gauss-Legendre moments (computed in magnus_exp.m). The repository also contains the tutorial 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "jtut"
+literal "false"
+\end_inset
+, 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "j28"
+literal "false"
+\end_inset
+ and this paper with their Word, LyX and LaTeX sources, and research resources: a guide to the derivation and verification methods, Python reference code in exact rational arithmetic, and the defining equations of the order-10 coefficients.
 \end_layout
 
 \begin_layout Section*
@@ -10589,16 +10650,47 @@ Value
 \begin_layout Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
+key "jtut"
+literal "false"
+
+\end_inset
+
+K. C. Johnson, “Quadrature approximation to the Magnus exponent for numerical solution of non-autonomous coupled linear differential equations,” Version 09-Nov-2026, explde.pdf, 
+\begin_inset CommandInset href
+LatexCommand href
+name "https://github.com/kjinnovation/explde"
+target "https://github.com/kjinnovation/explde"
+literal "false"
+\end_inset
+, 
+\begin_inset CommandInset href
+LatexCommand href
+name "https://vixra.org/abs/2604.0065"
+target "https://vixra.org/abs/2604.0065"
+literal "false"
+\end_inset
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
 key "j28"
 literal "false"
 
 \end_inset
 
-K. C. Johnson, “The centered Magnus exponent and Magnus quadrature formulas of orders 2, 4, 6 and 8,” Version 02-Nov-2026, magnus_order_2-8.pdf, 
+K. C. Johnson, “The Centered Magnus Exponent and Magnus Quadrature Formulas of Orders 2, 4, 6 and 8,” Version 09-Nov-2026, magnus_order_2-8.pdf, 
 \begin_inset CommandInset href
 LatexCommand href
 name "https://github.com/kjinnovation/explde"
 target "https://github.com/kjinnovation/explde"
+literal "false"
+\end_inset
+, 
+\begin_inset CommandInset href
+LatexCommand href
+name "https://ai.vixra.org/abs/2611.0005"
+target "https://ai.vixra.org/abs/2611.0005"
 literal "false"
 \end_inset
 \end_layout

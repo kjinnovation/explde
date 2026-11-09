@@ -1,13 +1,20 @@
 function Omega = magnus_exp(fA,t0,t1,ord)
 %MAGNUS_EXP Magnus exponent computation
 %   This function calculates the Magnus exponent, as described in the
-%   following publications (cited herein as "Doc1" and "Doc2"):
+%   following publications (cited herein as "Doc0", "Doc1" and "Doc2"):
+%   * Doc0 (tutorial introduction): K. C. Johnson, "Quadrature
+%     approximation to the Magnus exponent for numerical solution of
+%     non-autonomous coupled linear differential equations," Version
+%     09-Nov-2026 (explde.pdf, https://vixra.org/abs/2604.0065)
 %   * Doc1: K. C. Johnson, "The centered Magnus exponent and Magnus
-%   quadrature formulas of orders 2, 4, 6 and 8," Version 02-Nov-2026
-%   (magnus_order_2-8.pdf)
+%     quadrature formulas of orders 2, 4, 6 and 8," Version 09-Nov-2026
+%     (magnus_order_2-8.pdf, https://ai.vixra.org/abs/2611.0005)
 %   * Doc2: K. C. Johnson, "Magnus quadrature formulas of order 10 on a
-%   centered interval," Version 02-Nov-2026 (magnus_order_10.pdf).
-%   Code and documents: https://github.com/kjinnovation/explde
+%     centered interval," Version 09-Nov-2026 (magnus_order_10.pdf,
+%     https://ai.vixra.org/abs/2611.0004)
+%   * Code and documentation repositories:
+%     https://github.com/kjinnovation/explde
+%     https://www.mathworks.com/matlabcentral/fileexchange/183695-explde
 %
 % The Magnus function Omega(t) is the solution of the differential equation
 %   (d/dt)exp(Omega(t)) = fA(t)*exp(Omega(t)), with Omega(t0) = zeros(...)
@@ -27,17 +34,13 @@ function Omega = magnus_exp(fA,t0,t1,ord)
 %   t0, t1: integration limits, scalar (or size-[1,1,...] and
 %   size-compatible for paged operation).
 %
-%   ord: quadrature approximation order, either 2, 4, 6, 8, or 10. (See
-%   Note.)
+%   ord: quadrature approximation order, either 2, 4, 6, 8, or 10.
 %
 % Output:
 %
 %   Omega: Magnus exponent at t = t1, size-matched to A.
-%
-% Note:
-%   For ord==10, magnus10coef.m must be on the Matlab path.
 
-% version 02-Nov-2026, Ken Johnson, ken@kjinnovation.com
+% version 09-Nov-2026, Ken Johnson, ken@kjinnovation.com
 
 persistent x
 % Argument validation
@@ -63,10 +66,10 @@ end
 
 switch ord
     case 2
-        % Doc1 Eq 44
+        % Doc1 Eq 12
         Omega = (t1-t0).*fA(0.5*(t0+t1));
     case 4
-        % Doc1 Eqs 45, 42, 36 and Table 3
+        % Doc1 Eqs 13, 10 and Table 2; Doc0 Eq 56 (P_k)
         t_ctr = 0.5*(t0+t1);
         dt = 0.5*(t1-t0);
         u2 = 1/sqrt(3);
@@ -77,7 +80,7 @@ switch ord
         g1 = dt.*(u2*(A2-A1));
         Omega = g0-0.5*cmt(g0,g1);
     case 6
-        % Doc1 Eqs 47, 42, 36 and Table 3
+        % Doc1 Eqs 15, 10 and Table 2; Doc0 Eqs 80, 56 (P_k)
         t_ctr = 0.5*(t0+t1);
         dt = 0.5*(t1-t0);
         u3 = sqrt(3/5);
@@ -93,7 +96,7 @@ switch ord
         C3 = cmt(g0-g2-3/10*C1,g1-1/6*C2);
         Omega = g0-1/2*C3;
     case 8
-        % Doc1 Eqs 48, 42, 36 and Table 3
+        % Doc1 Eqs 16, 10 and Table 2; Doc0 Eq 56 (P_k)
         t_ctr = 0.5*(t0+t1);
         dt = 0.5*(t1-t0);
         u3 = 3/7;
@@ -123,20 +126,92 @@ switch ord
         C6 = cmt(g0-C1+C3,3*g1+7*g3+1/2*C2-1/6*C5);
         Omega = g0+7/20*C3-1/20*C6;
     case 10
-        % Doc2 Eq 3 and Table 4, Doc1 Eqs 42, 36
+        % Doc2 Eq 3 and Table 4; Doc1 Eq 10; Doc0 Eq 56 (P_k)
         if isempty(x)
-            try
-                x = magnus10coef;
-            catch err
-                x = []; % Keep persistent x uninitialized.
-                rethrow(err);
-            end
-            if ~(iscolumn(x) && length(x)==81)
-                x = [];
-                error('explde:Validation', ...
-                    ['In magnus_exp(fA,t0,t1,ord): ' ...
-                    'Error reading x = magnus10coef.']);
-            end
+            % copied from magnus10coef.m
+            x = [
+                5/3
+                0.0901217511054286179200006432152
+                0.132144147153367034682119532902
+                -1/5
+                -0.472685390399902712406002183602
+                3.23401783247220824419907849435
+                1
+                0.161670971415242270251705225531
+                -0.525919202398768195923304595384
+                -1.53079589966726923775289156382
+                -0.910924396469683553350121373571
+                -19/20
+                -0.455192455511641898707317211627
+                -7/160
+                1/20
+                0.999065729598492021595447046029
+                -0.169685143102619456375901958438
+                3.92051929889526396734420883485
+                1
+                0.555796983434714384253066760376
+                -0.607334116992801989897737814155
+                1
+                -8.07420917786156075183923102445
+                -10.0495069461621075880489787299
+                80/3
+                19/2
+                12.1017461973869000839204686308
+                -31.4531547349911685094163487849
+                1/20
+                0.275188457138167181875630064491
+                -0.954326847042167934105954068326
+                -0.784727265144758812578823778889
+                1
+                -1/4
+                1.61045764376873307258367256828
+                2.94807728420384234993029710640
+                -11
+                1
+                -0.246517496492115672033127579776
+                -2.90152105321322178449420125787
+                -0.720231951037809406297947770664
+                1
+                -1/8
+                -0.0834850346446151127595195646048
+                0.596648858778570464309441892471
+                -0.0848726298881828778243828476824
+                0.189439293642050895990550879245
+                -1
+                1/11
+                -2/9
+                -1.22504203400172707389155574478
+                2.93982839425824894217792481282
+                1.89056056479215080737398254598
+                1
+                -9/4
+                0.493726863995418585916367639513
+                0.143371545985261839634589032722
+                -1.10171588444014784576499503191
+                -1.33521791511463352749639989683
+                3
+                -0.300277475990164551753003485261
+                0.0422226321169889153042100461307
+                -0.707315165639034053327374104654
+                -1.00852021385304266703414054617
+                0.522319462460385203547544946442
+                -0.0395250285511817450646611919490
+                1/2
+                0.124884180986072604975597118288
+                -0.501432555510506461635553953416
+                0.335346238212012539516596859030
+                0.359077663794944462844741747862
+                0.837847882188203746637730745011
+                1/5
+                -0.0277515431965363360406864485263
+                -0.0751536499542879518128684277851
+                -0.594739381596017298987763177053
+                0.345400850217906386578044663611
+                -0.119041629440661798962689039945
+                0.195879050217731400879397915960
+                -0.219699011141684586146119923134
+                0.263055372971027419203395240270
+                ];
         end
         t_ctr = 0.5*(t0+t1);
         dt = 0.5*(t1-t0);

@@ -3,253 +3,69 @@
 \usepackage{amsmath,amssymb}
 \usepackage{float}
 \setlength{\abovecaptionskip}{0pt}\setlength{\belowcaptionskip}{6pt}
+\usepackage{xurl}
 \usepackage[hidelinks]{hyperref}
 \title{The centered Magnus exponent and Magnus quadrature formulas of orders 2, 4, 6 and 8}
 \author{Kenneth C. Johnson\\ \normalsize ken@kjinnovation.com}
-\date{Version 02-Nov-2026}
+\date{Version 09-Nov-2026\\ \url{https://ai.vixra.org/abs/2611.0005}}
 \begin{document}
 \maketitle
 
 \section*{Abstract}
 
-\noindent The Magnus exponent is formulated over an integration interval $[-t,t]$ that is centered on the origin, so that the solution at $t$ is obtained from the solution at $-t$. In this centered formulation the propagator satisfies $U(-t)=U(t)^{-1}$, the Magnus exponent is an odd function of $t$, and the Magnus theorem takes a form in which the even and odd parts of the coefficient matrix appear separately. The Magnus exponent is then expressed in Legendre moments of the coefficient matrix over the centered interval, and quadrature formulas with residual errors of order $t^3$, $t^5$, $t^7$ and $t^9$ are given, using 0, 1, 3 and 6 commutators with the moments evaluated by Gauss-Legendre, Newton-Cotes or Gauss-Lobatto quadrature, and Gauss-Kronrod rules are shown to give embedded error estimates. The methodology and results are compared with those of Blanes et al. \cite{bcr2000}, \cite{bcr2002}, \cite{bcor2009}.
+\noindent The Magnus exponent is formulated over an integration interval $[-t,t]$ that is centered on the origin, so that the solution at $t$ is obtained from the solution at $-t$. In this centered formulation the propagator satisfies $U(-t)=U(t)^{-1}$, the Magnus exponent is an odd function of $t$, and the Magnus theorem takes a form in which the even and odd parts of the coefficient matrix appear separately. The centered formulation, the Legendre-moment representation and an order-6 formula are derived in an introductory tutorial \cite{jtut}. Here the Magnus exponent is expressed in Legendre moments of the coefficient matrix over the centered interval, and Legendre-moment approximations with residual errors of order $t^3$, $t^5$, $t^7$ and $t^9$ are given, using 0, 1, 3 and 6 commutators, with the moments evaluated by Gauss-Legendre, Newton-Cotes or Gauss-Lobatto quadrature, and Gauss-Kronrod rules are shown to give embedded error estimates. The methodology and results are compared with those of Blanes et al. \cite{bcr2000}, \cite{bcr2002}, \cite{bcor2009}. A companion paper \cite{j10} extends the formulas to order 10.
 
-\section*{Linear differential equations}
+\section*{Introduction}
 
-A \emph{first-order, linear differential equation} or system of differential equations has the form
-\begin{equation}
-F'(t)=A(t)\cdot F(t)+B(t)\label{eq:ode}
-\end{equation}
-where $F(t)$ and $B(t)$ are vector functions and $A(t)$ is a square-matrix function of scalar argument $t$. The equation is \emph{autonomous} if $A$ and $B$ are constant, and is \emph{homogeneous} if $B(t)$ is identically zero.
+The introductory tutorial \cite{jtut} derives the centered formulation of the Magnus exponent, the commutator and adjoint-operator relations it uses, the centered Magnus theorem, the Legendre polynomials and centered Legendre moments, and an order-6 Magnus quadrature formula with three commutators. That material is not repeated here. This section summarizes the results that are used below, and the rest of the paper extends the tutorial to the Magnus exponent series in Legendre moments, Legendre-moment expansions of orders 2 to 8, alternative quadrature rules for the moments, test results, and a comparison with the work of Blanes et al.
 
-In the centered formulation, the integration interval is $[-t,t]$: the value $F(-t)$ is specified and $F(t)$ is to be determined. Any interval can be put in this form by shifting the time origin to its midpoint; an interval of length $h$ centered at $t_0$ corresponds to $t=h/2$, with $A(\tau)$ and $B(\tau)$ replaced by $A(t_0+\tau)$ and $B(t_0+\tau)$.
-
-A nonhomogeneous equation can be converted to a homogeneous equation by using an alternative formulation of Eq.~\ref{eq:ode},
-\begin{equation}
-\frac{d}{dt}\begin{pmatrix}F(t)\\ 1\end{pmatrix}=\begin{pmatrix}A(t) & B(t)\\ \mathbf{0} & 0\end{pmatrix}\cdot\begin{pmatrix}F(t)\\ 1\end{pmatrix}\label{eq:aug}
-\end{equation}
-where $\mathbf{0}$ represents a zero row vector. Therefore, we need only consider homogeneous equations, although Eq.~\ref{eq:aug} might be implemented to efficiently take advantage of the zeros in the coefficient matrix.
-
-With $B(t)=\mathbf{0}$, the value $F(t)$ is a linear function of $F(-t)$,
+The linear differential equation $F'(t)=A(t)\cdot F(t)$, where $A(t)$ is a square-matrix function of scalar argument $t$, is solved over the centered interval $[-t,t]$: the value $F(-t)$ is specified and $F(t)$ is to be determined. (A nonhomogeneous equation can be put in this form \cite{jtut}, and any interval can be centered by shifting the time origin to its midpoint; an interval of length $h$ centered at $t_0$ corresponds to $t=h/2$, with $A(\tau)$ replaced by $A(t_0+\tau)$.) The solution is
 \begin{equation}
 F(t)=U(t)\cdot F(-t)\label{eq:centered}
 \end{equation}
-where the propagator $U(t)$ is defined by
+where the centered propagator $U(t)$ is defined by
 \begin{equation}
 U'(t)=A(t)\cdot U(t)+U(t)\cdot A(-t),\quad U(0)=\mathbf{I}\label{eq:uode}
 \end{equation}
-and $\mathbf{I}$ is the identity matrix. Eq.~\ref{eq:uode} follows from differentiating Eq.~\ref{eq:centered} with respect to $t$, using $\frac{d}{dt}F(-t)=-F'(-t)=-A(-t)\cdot F(-t)$,
-\begin{equation}
-F'(t)=U'(t)\cdot F(-t)-U(t)\cdot A(-t)\cdot F(-t)\label{eq:diffcent}
-\end{equation}
-and equating this with $F'(t)=A(t)\cdot F(t)=A(t)\cdot U(t)\cdot F(-t)$. Both expressions hold for every solution $F$, and $F(-t)$ can take any value, so the matrix coefficients of $F(-t)$ are equal; this is Eq.~\ref{eq:uode}. The initial condition $U(0)=\mathbf{I}$ is Eq.~\ref{eq:centered} at $t=0$.
-
-$U(t)$ is related to the conventional (uncentered) propagator $V(t)$, defined by
-\begin{equation}
-V'(t)=A(t)\cdot V(t),\quad V(0)=\mathbf{I}\label{eq:vode}
-\end{equation}
-which gives $F(t)=V(t)\cdot F(0)$ for every $t$. Hence $F(t)=V(t)\cdot F(0)$ and $F(-t)=V(-t)\cdot F(0)$, and eliminating $F(0)$ gives Eq.~\ref{eq:centered} with
+and $\mathbf{I}$ is the identity matrix. $U(t)$ is related to the conventional propagator $V(t)$, defined by $V'(t)=A(t)\cdot V(t)$ and $V(0)=\mathbf{I}$, by
 \begin{equation}
 U(t)=V(t)\cdot V(-t)^{-1}\label{eq:uv}
 \end{equation}
-Replacing $t$ by $-t$ in Eq.~\ref{eq:uv} gives the time-reversal property of the centered propagator,
+(because $F(t)=V(t)\cdot F(0)$ and $F(-t)=V(-t)\cdot F(0)$), and replacing $t$ by $-t$ gives the time-reversal property
 \begin{equation}
-U(-t)=V(-t)\cdot V(t)^{-1}=U(t)^{-1}\label{eq:uinv}
+U(-t)=U(t)^{-1}\label{eq:uinv}
 \end{equation}
-(Eq.~\ref{eq:uinv} also follows directly from Eq.~\ref{eq:centered}: $F(-t)=U(-t)\cdot F(t)$.) The centered propagator and the time-reversal property of Eq.~\ref{eq:uinv} appear in Blanes et al. \cite{bcor2009} (its Eqs. 63-66), where they are used to show that the Magnus exponent of a step contains only odd powers of the step size.
+The centered propagator and Eq.~\ref{eq:uinv} also appear in Blanes et al. \cite{bcor2009} (its Eqs. 63-66), where they are used to show that the Magnus exponent of a step contains only odd powers of the step size.
 
-\section*{The centered Magnus exponent}
-
-Eq.~\ref{eq:uode} has an exponential-matrix solution,
-\begin{equation}
-U(t)=\exp(\Omega(t))\label{eq:uexp}
-\end{equation}
-If the values of $A$ at all times commute with each other, then $\Omega(t)$ is the integral of $A$ over the interval, $\Omega(t)=\int_{-t}^{t}dt_1\cdot A(t_1)$, but we are concerned here with the case where this condition does not hold. In general, $\Omega(t)$ (the \emph{centered Magnus exponent}) is defined by the conditions
-\begin{equation}
-\frac{d}{dt}\exp(\Omega(t))=A(t)\cdot\exp(\Omega(t))+\exp(\Omega(t))\cdot A(-t),\quad\Omega(0)=\mathbf{0}\label{eq:omegadef}
-\end{equation}
-For $t$ small enough that the matrix logarithm near $\mathbf{I}$ is unique, Eq.~\ref{eq:uinv} implies that $\Omega$ is an odd function of $t$,
+The \emph{centered Magnus exponent} $\Omega(t)$ is defined by $U(t)=\exp(\Omega(t))$ with $\Omega(0)=\mathbf{0}$. For $t$ small enough that the matrix logarithm near $\mathbf{I}$ is unique, Eq.~\ref{eq:uinv} implies that $\Omega$ is an odd function of $t$,
 \begin{equation}
 \Omega(-t)=-\Omega(t)\label{eq:odd}
 \end{equation}
-
-\section*{Commutator algebra}
-
-The derivations below use the following definitions and relations. The \emph{commutator} $[\ldots]$ is defined, for square matrix arguments $A$ and $B$, as
-\begin{equation}
-[A,B]=A\cdot B-B\cdot A\label{eq:comm}
-\end{equation}
-The commutator is antisymmetric and satisfies the Jacobi identity,
-\begin{equation}
-[B,A]=-[A,B]\label{eq:anti}
-\end{equation}
-\begin{equation}
-[A,[B,C]]+[B,[C,A]]+[C,[A,B]]=\mathbf{0}\label{eq:jacobi}
-\end{equation}
-The \emph{adjoint mapping} ``$ad$'' is defined by
-\begin{equation}
-ad_{\Omega}^{j}(X)=\underbrace{[\Omega,[\Omega,\ldots[\Omega}_{j\text{ times}},X]]]:\quad ad_{\Omega}^{0}(X)=X,\quad ad_{\Omega}^{j+1}(X)=[\Omega,ad_{\Omega}^{j}(X)]\label{eq:addef}
-\end{equation}
-$ad$ has the following properties,
-\begin{equation}
-ad_{\Omega}^{j}(a\cdot X+b\cdot Y)=a\cdot ad_{\Omega}^{j}(X)+b\cdot ad_{\Omega}^{j}(Y)\quad(\text{for scalars }a\text{ and }b)\label{eq:adlin}
-\end{equation}
-\begin{equation}
-ad_{\sigma\cdot\Omega}^{j}(X)=\sigma^{j}\cdot ad_{\Omega}^{j}(X)\quad(\text{scalar }\sigma)\label{eq:adscale}
-\end{equation}
-\begin{equation}
-ad_{\Omega}^{j+k}(X)=ad_{\Omega}^{j}(ad_{\Omega}^{k}(X))\label{eq:adcomp}
-\end{equation}
-
-\section*{Two exponential identities}
-
-The similarity transformation $\exp(\Omega)\cdot X\cdot\exp(-\Omega)$ has a series expansion of the form
-\begin{equation}
-\exp(\Omega)\cdot X\cdot\exp(-\Omega)=\sum_{j}\frac{1}{j!}\cdot ad_{\Omega}^{j}(X)\label{eq:sim}
-\end{equation}
-This relation is derived as follows: For scalar $\sigma$, the following relation is obtained by induction,
-\begin{equation}
-\frac{d^{j}}{d\sigma^{j}}\big(\exp(\sigma\cdot\Omega)\cdot X\cdot\exp(-\sigma\cdot\Omega)\big)=\exp(\sigma\cdot\Omega)\cdot ad_{\Omega}^{j}(X)\cdot\exp(-\sigma\cdot\Omega)\label{eq:simind}
-\end{equation}
-Hence, the expression $\exp(\sigma\cdot\Omega)\cdot X\cdot\exp(-\sigma\cdot\Omega)$ has the Taylor series expansion
-\begin{equation}
-\exp(\sigma\cdot\Omega)\cdot X\cdot\exp(-\sigma\cdot\Omega)=\sum_{j}\frac{\sigma^{j}}{j!}\cdot ad_{\Omega}^{j}(X)\label{eq:simtaylor}
-\end{equation}
-Eq.~\ref{eq:sim} follows from Eq.~\ref{eq:simtaylor} with $\sigma=1$.
-
-The derivative of $\exp(\Omega(t))$ has the following relationship to $\Omega'(t)$,
-\begin{equation}
-\frac{d}{dt}\exp(\Omega(t))=\left(\sum_{j}\frac{1}{(j+1)!}\cdot ad_{\Omega(t)}^{j}(\Omega'(t))\right)\cdot\exp(\Omega(t))\label{eq:dexp}
-\end{equation}
-This relation is derived by first applying Eqs.~\ref{eq:sim} and \ref{eq:adscale} to simplify the following expression,
+With the commutator $[X,Y]=X\cdot Y-Y\cdot X$ and the adjoint mapping $ad_{\Omega}^{0}(X)=X$, $ad_{\Omega}^{j}(X)=[\Omega,ad_{\Omega}^{j-1}(X)]$ ($j$ nested commutators with $\Omega$), $\Omega(t)$ satisfies the \emph{centered Magnus theorem} \cite{jtut},
 \begin{equation}
 \begin{aligned}
-&\frac{\partial}{\partial\sigma}\left(\left(\frac{\partial}{\partial t}\exp(\sigma\cdot\Omega(t))\right)\cdot\exp(-\sigma\cdot\Omega(t))\right)\\
-&=\left(\frac{\partial}{\partial t}\big(\exp(\sigma\cdot\Omega(t))\cdot\Omega(t)\big)\right)\cdot\exp(-\sigma\cdot\Omega(t))\\
-&\quad-\left(\frac{\partial}{\partial t}\exp(\sigma\cdot\Omega(t))\right)\cdot\Omega(t)\cdot\exp(-\sigma\cdot\Omega(t))\\
-&=\exp(\sigma\cdot\Omega(t))\cdot\Omega'(t)\cdot\exp(-\sigma\cdot\Omega(t))\\
-&=\sum_{j}\frac{1}{j!}\cdot ad_{\sigma\cdot\Omega(t)}^{j}(\Omega'(t))=\sum_{j}\frac{\sigma^{j}}{j!}\cdot ad_{\Omega(t)}^{j}(\Omega'(t))
-\end{aligned}\label{eq:dexpsigma}
-\end{equation}
-Eq.~\ref{eq:dexpsigma} is integrated over $\sigma$ to obtain Eq.~\ref{eq:dexp},
-\begin{equation}
-\begin{aligned}
-&\left(\frac{\partial}{\partial t}\exp(\Omega(t))\right)\cdot\exp(-\Omega(t))\\
-&=\int_{0}^{1}d\sigma\cdot\frac{\partial}{\partial\sigma}\left(\left(\frac{\partial}{\partial t}\exp(\sigma\cdot\Omega(t))\right)\cdot\exp(-\sigma\cdot\Omega(t))\right)\\
-&=\sum_{j}\frac{1}{(j+1)!}\cdot ad_{\Omega(t)}^{j}(\Omega'(t))
-\end{aligned}\label{eq:dexpint}
-\end{equation}
-
-\section*{The centered Magnus theorem}
-
-The last term in Eq.~\ref{eq:omegadef} is rewritten with Eq.~\ref{eq:sim} as $\exp(\Omega(t))\cdot A(-t)=\big(\exp(\Omega(t))\cdot A(-t)\cdot\exp(-\Omega(t))\big)\cdot\exp(\Omega(t))=\big(\sum_{j}\frac{1}{j!}\cdot ad_{\Omega(t)}^{j}(A(-t))\big)\cdot\exp(\Omega(t))$. Eq.~\ref{eq:dexp} and this expression are substituted into Eq.~\ref{eq:omegadef}, and the common right factor $\exp(\Omega(t))$ is cancelled,
-\begin{equation}
-\sum_{j}\frac{1}{(j+1)!}\cdot ad_{\Omega(t)}^{j}(\Omega'(t))=A(t)+\sum_{j}\frac{1}{j!}\cdot ad_{\Omega(t)}^{j}(A(-t))\label{eq:subst}
-\end{equation}
-This relation is inverted to solve for $\Omega'(t)$,
-
-\emph{The centered Magnus theorem}:
-\begin{equation}
-\begin{aligned}
-\Omega'(t)&=\sum_{k}\frac{B_{k}}{k!}\cdot ad_{\Omega(t)}^{k}\big(A(t)+(-1)^{k}\cdot A(-t)\big)\\
+\Omega'(t)&=\sum_{j}c_{j}\cdot ad_{\Omega(t)}^{2j}\big(A(t)+A(-t)\big)-\tfrac{1}{2}\cdot\big[\Omega(t),A(t)-A(-t)\big]\\
 &=A(t)+A(-t)-\tfrac{1}{2}\cdot[\Omega(t),A(t)-A(-t)]+\tfrac{1}{12}\cdot[\Omega(t),[\Omega(t),A(t)+A(-t)]]\\
-&\quad-\tfrac{1}{720}\cdot[\Omega(t),[\Omega(t),[\Omega(t),[\Omega(t),A(t)+A(-t)]]]]+O(t^{6})\\
-&\quad\big(\text{with }\Omega(0)=\mathbf{0},\ \Omega(t)=O(t)\big)
-\end{aligned}\label{eq:theorem}
+&\quad-\tfrac{1}{720}\cdot[\Omega(t),[\Omega(t),[\Omega(t),[\Omega(t),A(t)+A(-t)]]]]+O(t^{6})
+\end{aligned}\label{eq:evenodd}
 \end{equation}
-The $B_k$ factors are the \emph{Bernoulli numbers}, defined by
-\begin{equation}
-\begin{aligned}
-&B_{0}=1;\quad\text{For }j>0,\ B_{j}=-\sum_{k=0}^{j-1}\frac{j!}{(j-k+1)!\cdot k!}\cdot B_{k}\\
-&\{B_{0},B_{1},\ldots\}=\{1,-\tfrac{1}{2},\tfrac{1}{6},0,-\tfrac{1}{30},0,\tfrac{1}{42},0,-\tfrac{1}{30},0,\tfrac{5}{66},0,-\tfrac{691}{2730},\ldots\}
-\end{aligned}\label{eq:bernoulli}
-\end{equation}
-(The truncated series residual in Eq.~\ref{eq:theorem} is $O(t^6)$, not $O(t^5)$, because $B_5=0$.)
-
-Eq.~\ref{eq:theorem} is obtained from Eq.~\ref{eq:subst} as follows. For a power series $f(x)=\sum_j f_j\cdot x^j$ with scalar coefficients $f_j$, define the operator
-\begin{equation}
-f(ad_{\Omega})(X)=\sum_{j}f_{j}\cdot ad_{\Omega}^{j}(X)\label{eq:opdef}
-\end{equation}
-By Eqs.~\ref{eq:adlin} and \ref{eq:adcomp}, applying two such operators in succession is the same as applying the operator of the product series,
-\begin{equation}
-f(ad_{\Omega})\big(g(ad_{\Omega})(X)\big)=(f\cdot g)(ad_{\Omega})(X)\label{eq:opprod}
-\end{equation}
-where $(f\cdot g)(x)=f(x)\cdot g(x)=\sum_j\big(\sum_{k=0}^{j}f_k\cdot g_{j-k}\big)\cdot x^j$. Eq.~\ref{eq:subst} has the form $s(ad_{\Omega(t)})(\Omega'(t))=A(t)+e(ad_{\Omega(t)})(A(-t))$, with the power series
-\begin{equation}
-s(x)=\sum_{j}\frac{x^{j}}{(j+1)!},\quad e(x)=\sum_{j}\frac{x^{j}}{j!},\quad\beta(x)=\sum_{k}\frac{B_{k}}{k!}\cdot x^{k}\label{eq:series}
-\end{equation}
-($e(x)$ is the exponential series, and $x\cdot s(x)=e(x)-1$.) The coefficient of $x^j$ in $\beta(x)\cdot s(x)$ is $\sum_{k=0}^{j}\frac{B_k}{k!\cdot(j-k+1)!}$, which by Eq.~\ref{eq:bernoulli} is 1 for $j=0$ and 0 for $j>0$:
-\begin{equation}
-\beta(x)\cdot s(x)=1\label{eq:betas}
-\end{equation}
-Multiplying Eq.~\ref{eq:betas} by $x$ gives $\beta(x)\cdot(e(x)-1)=x$. Replacing $x$ by $-x$ and multiplying by $-e(x)$ (using $e(-x)\cdot e(x)=1$) gives $\beta(-x)\cdot(e(x)-1)=x\cdot e(x)=\beta(x)\cdot e(x)\cdot(e(x)-1)$. The common factor $e(x)-1=x\cdot s(x)$ can be cancelled (power series have no zero divisors), so
-\begin{equation}
-\beta(x)\cdot e(x)=\beta(-x)\label{eq:betae}
-\end{equation}
-Now $\beta(ad_{\Omega(t)})$ is applied to both sides of Eq.~\ref{eq:subst}. By Eqs.~\ref{eq:opprod} and \ref{eq:betas}, the left side becomes $\Omega'(t)$. By Eqs.~\ref{eq:opprod} and \ref{eq:betae}, the right side becomes $\beta(ad_{\Omega(t)})(A(t))+\beta(-ad_{\Omega(t)})(A(-t))$, which is the first line of Eq.~\ref{eq:theorem}.
-
-Eq.~\ref{eq:betae} also determines the odd Bernoulli numbers. Since $\beta(x)\cdot(e(x)-1)=x$, it gives $\beta(-x)=\beta(x)+x$; the odd terms of this power-series identity are
-\begin{equation}
-B_{1}=-\tfrac{1}{2},\quad B_{k}=0\ \ (k\text{ odd},\ k\ge3)\label{eq:oddbern}
-\end{equation}
-Hence the centered Magnus theorem separates into the even part $A(t)+A(-t)$ and the odd part $A(t)-A(-t)$ of the coefficient matrix,
-\begin{equation}
-\Omega'(t)=\sum_{k\text{ even}}\frac{B_{k}}{k!}\cdot ad_{\Omega(t)}^{k}\big(A(t)+A(-t)\big)-\tfrac{1}{2}\cdot\big[\Omega(t),A(t)-A(-t)\big]\label{eq:evenodd}
-\end{equation}
-
-\section*{Time-reversal symmetry}
-
-Eq.~\ref{eq:evenodd} is consistent with the odd symmetry of Eq.~\ref{eq:odd}. If $\Omega(t)$ is an odd function of $t$, then each term on the right side of Eq.~\ref{eq:evenodd} is an even function of $t$: $ad_{\Omega(t)}^k$ with $k$ even preserves the even parity of $A(t)+A(-t)$, and one commutator with the odd $\Omega(t)$ turns the odd $A(t)-A(-t)$ into an even function. So $\Omega'(t)$ is even, and its integral with $\Omega(0)=\mathbf{0}$ is odd. When $A$ is expanded in a Taylor series about $t=0$ and Eq.~\ref{eq:evenodd} is solved by successive approximation, every term of the resulting series for $\Omega(t)$ is therefore an odd power of $t$.
-
-The leading term is $\Omega(t)=\int_{-t}^{t}dt_1\cdot A(t_1)+O(t^3)$, from $\Omega'(t)=A(t)+A(-t)+O(t^2)$.
+where $c_j=B_{2j}/(2j)!$ ($c_0=1$, $c_1=\frac{1}{12}$, $c_2=-\frac{1}{720}$, …) and the $B_{2j}$ are Bernoulli numbers. The even part $A(t)+A(-t)$ and the odd part $A(t)-A(-t)$ of the coefficient matrix appear separately. If $\Omega(t)$ is odd, each term on the right side of Eq.~\ref{eq:evenodd} is even ($ad_{\Omega(t)}^{2j}$ preserves the parity of $A(t)+A(-t)$, and one commutator with the odd $\Omega(t)$ turns the odd $A(t)-A(-t)$ into an even function), so its integral with $\Omega(0)=\mathbf{0}$ is odd, consistent with Eq.~\ref{eq:odd}. When $A$ is expanded in a Taylor series about $t=0$ and Eq.~\ref{eq:evenodd} is solved by successive approximation, every term of the series for $\Omega(t)$ is therefore an odd power of $t$; the leading term is $\Omega(t)=\int_{-t}^{t}A(\tau)\,d\tau+O(t^3)$.
 
 \section*{Centered Legendre moments}
 
-The quadrature formulas below express $\Omega(t)$ in terms of Legendre moments of $A$ over the centered interval,
+The formulas below express $\Omega(t)$ in terms of the Legendre moments of $A$ over the centered interval \cite{jtut},
 \begin{equation}
 g_{k}(t)=\int_{-t}^{t}P_{k}(\tau/t)\cdot A(\tau)\,d\tau\label{eq:gdef}
 \end{equation}
-where $P_k$ is the Legendre polynomial of degree $k$, defined by
-\begin{equation}
-P_{0}(u)=1,\quad P_{1}(u)=u,\quad(k+1)\cdot P_{k+1}(u)=(2k+1)\cdot u\cdot P_{k}(u)-k\cdot P_{k-1}(u)\label{eq:pdef}
-\end{equation}
-The polynomials needed for Magnus formulas of orders up to 10 are listed in Table~\ref{tab:legendre}; a formula of order $2n$ uses $P_0,\ldots,P_{n-1}$.
-
-\begin{table}[H]
-\centering\small
-\caption{Legendre polynomials $P_0,\ldots,P_4$.}\label{tab:legendre}
-\begin{tabular}{ll}
-\hline
-$k$ & $P_k(u)$ \\ \hline
-0 & $1$ \\
-1 & $u$ \\
-2 & $(3u^{2}-1)/2$ \\
-3 & $(5u^{3}-3u)/2$ \\
-4 & $(35u^{4}-30u^{2}+3)/8$ \\ \hline
-\end{tabular}
-\end{table}
-
-\noindent The Legendre polynomials are orthogonal on $[-1,1]$ and have definite parity,
-\begin{equation}
-\int_{-1}^{1}P_{j}(u)\cdot P_{k}(u)\,du=\frac{2}{2k+1}\cdot\delta_{jk},\quad P_{k}(-u)=(-1)^{k}\cdot P_{k}(u)\label{eq:porth}
-\end{equation}
-($\delta_{jk}$ is the Kronecker delta.) $g_0(t)$ is the integral of $A$ over the interval, and if $A$ is constant then $g_k(t)=\mathbf{0}$ for $k\ge1$. With $A$ expanded in a Taylor series about $\tau=0$, Eq.~\ref{eq:gdef} gives
-\begin{equation}
-g_{k}(t)=\sum_{j\ge k,\ j-k\text{ even}}c_{kj}\cdot\frac{t^{j+1}}{j!}\cdot A^{(j)}(0),\quad c_{kj}=\int_{-1}^{1}P_{k}(u)\cdot u^{j}\,du\label{eq:gtaylor}
-\end{equation}
-($c_{kj}=0$ for $j<k$ and for odd $j-k$), so $g_k(t)=O(t^{k+1})$, with leading coefficient $c_{kk}=2^{k+1}\cdot(k!)^2/(2k+1)!$. We call $k+1$ the \emph{weight} of $g_k$; the weight of a product or commutator of moments is the sum of the weights of its factors, and a term of weight $n$ is $O(t^n)$. Replacing $t$ by $-t$ in Eq.~\ref{eq:gdef}, substituting $\tau\to-\tau$ and using Eq.~\ref{eq:porth} shows that the moments have definite parity,
+where $P_k$ is the Legendre polynomial of degree $k$ (see \cite{jtut} for the definition and properties of the Legendre polynomials). $g_0(t)$ is the integral of $A$ over the interval, and if $A$ is constant then $g_k(t)=\mathbf{0}$ for $k\ge1$. As shown in \cite{jtut}, $g_k(t)=O(t^{k+1})$; more precisely, with $A$ expanded in a Taylor series about $\tau=0$ the leading term of $g_k(t)$ is $c_{kk}\cdot t^{k+1}\cdot A^{(k)}(0)/k!$, with $c_{kk}=\int_{-1}^{1}P_k(u)\cdot u^k\,du=2^{k+1}\cdot(k!)^2/(2k+1)!$. We call $k+1$ the \emph{weight} (aka order) of $g_k$; a term of weight $n$ is $O(t^n)$ and the weight of a product is the sum of its factors' weights. Replacing $t$ by $-t$ in Eq.~\ref{eq:gdef}, substituting $\tau\to-\tau$ and using the parity $P_k(-u)=(-1)^k\cdot P_k(u)$ shows that the moments have definite parity,
 \begin{equation}
 g_{k}(-t)=(-1)^{k+1}\cdot g_{k}(t)\label{eq:gpar}
 \end{equation}
-$g_0$ and $g_2$ are odd functions of $t$, $g_1$ and $g_3$ are even, and a product of moments of weight $n$ has parity $(-1)^n$. Conversely, by orthogonality the moments determine $A$ through its Legendre series,
-\begin{equation}
-A(\tau)=\sum_{k}\frac{2k+1}{2t}\cdot g_{k}(t)\cdot P_{k}(\tau/t),\quad-t\le\tau\le t\label{eq:alegendre}
-\end{equation}
-which is a finite sum when $A$ is a polynomial.
+$g_0$ and $g_2$ are odd functions of $t$, $g_1$ and $g_3$ are even, and a product of moments of weight $n$ has parity $(-1)^n$.
 
 \section*{The Magnus exponent in Legendre moments}
 
-The Taylor-series solution of Eq.~\ref{eq:evenodd} can be re-expressed in the moments by inverting Eq.~\ref{eq:gtaylor}. This was done in exact rational arithmetic, by successive approximation of Eq.~\ref{eq:evenodd} through order $t^9$. Through weight 7 the result is, in the Lyndon basis of nested commutators,
+The tutorial \cite{jtut} expresses $\Omega(t)$ in the moments through order $t^7$ by Picard iteration of Eq.~\ref{eq:evenodd}, with $A$ expanded in Legendre polynomials. Here the Taylor-series solution of Eq.~\ref{eq:evenodd} was re-expressed in the moments by inverting the Taylor expansions of the $g_k$, in exact rational arithmetic, by successive approximation through order $t^9$. Through weight 7 the result is, in the Lyndon basis of nested commutators,
 \begin{equation}
 \begin{aligned}
 \Omega(t)={}&g_{0}\\
@@ -340,7 +156,7 @@ Order & Gauss-Legendre $\kappa$ & Newton-Cotes $\kappa$ \\ \hline
 \end{tabular}
 \end{table}
 
-\noindent so the two rules are about equally accurate at each order; they differ in the number of samples (see the algorithm section below).
+\noindent so the two rules are about equally accurate at each order; they differ in the number of samples (see the section on integration of the differential equation below).
 
 \emph{Gauss-Lobatto quadrature.} The Gauss-Lobatto rule with $n+1$ nodes includes both endpoints and is exact for polynomials of degree $2n-1$, so it serves order $2n$. The moments have the form of Eq.~\ref{eq:gauss}, with the weights applied to the products $P_k\cdot A$; interpolatory weights through the $n+1$ samples would be exact only for $A$ of degree $n$, which is not enough for $g_1$ when $n\ge3$. For orders 2 and 4 the rule coincides with the Newton-Cotes rule (nodes $\pm1$, and $-1,0,1$, with the same moment weights). For orders 6 and 8 it differs (Table~\ref{tab:lobatto}):
 
@@ -359,9 +175,9 @@ Nodes & Order & Nodes $u_i$ & Weights $w_i$ \\ \hline
 
 \emph{Gauss-Kronrod pairs.} For error estimation, the Kronrod extension \cite{kronrod} of the $n$-node Gauss-Legendre rule adds $n+1$ nodes, and the $2n+1$ nodes give a rule exact for polynomials of degree $3n+1$ ($n$ even) or $3n+2$ ($n$ odd). One set of samples then gives the moments of an order-$2n$ formula from the Gauss nodes alone and those of a higher-order formula from all $2n+1$ nodes; the difference of the two results estimates the error of the lower-order result and is a conservative bound for that of the higher-order one. For $n=1$ the Kronrod extension of the midpoint rule is the three-node Gauss-Legendre rule (orders 2 and 6). For $n=2$ the five nodes $0$, $\pm1/\sqrt{3}$ and $\pm\sqrt{6/7}$, with weights $14/45$, $27/110$ and $49/495$ respectively, give a rule of degree 7, so five samples give order-4 and order-8 results with $1+6=7$ commutators. For $n=3$ the seven-node rule (degree 11) serves order 8, and the companion paper \cite{j10} gives an embedded order-6/order-10 pair on it that reuses the three order-6 commutators. The Kronrod nodes do not include the endpoints, so all $2n+1$ samples are new in each step.
 
-\section*{Magnus quadrature formulas}
+\section*{Legendre-moment expansions of the Magnus exponent}
 
-With the moments from a rule of the appropriate order, the Magnus exponent is approximated as follows.
+The following formulas are approximations to the Magnus exponent derived from Eq. 49 of the tutorial \cite{jtut}, the integral form of the centered Magnus theorem (Eq.~\ref{eq:evenodd}). Successive approximation of that equation gives the series of Eq.~\ref{eq:target}, and the formula of order $2n$ reproduces the series through weight $2n-1$, with the fewest commutators found (Table~\ref{tab:conditions}). The formulas apply to exact moments or to moments computed with any rule of the preceding section of polynomial degree at least $2n-1$.
 
 \emph{Order 2} (no commutators):
 \begin{equation}
@@ -387,10 +203,10 @@ In terms of samples, with Gauss-Legendre nodes ($a_\pm=A(\pm t/\sqrt{3})$) and w
 \begin{aligned}
 C_{1}&=\big[g_{0},\ g_{1}\big]\\
 C_{2}&=\big[g_{0},\ g_{2}+\tfrac{1}{10}C_{1}\big]\\
-C_{3}&=\big[g_{0}-g_{2}-\tfrac{3}{10}C_{1},\ g_{1}-\tfrac{1}{6}C_{2}\big]\\
-\Omega(t)&=g_{0}-\tfrac{1}{2}C_{3}+O(t^{7})
+\Omega(t)&=g_{0}-\tfrac{1}{2}\big[g_{0}-g_{2}-\tfrac{3}{10}C_{1},\ g_{1}-\tfrac{1}{6}C_{2}\big]+O(t^{7})
 \end{aligned}\label{eq:f6}
 \end{equation}
+This is the formula derived step by step in the tutorial \cite{jtut}, where $C_1$ is denoted $C$.
 
 \emph{Order 8} (six commutators):
 \begin{equation}
@@ -406,7 +222,7 @@ C_{6}&=\big[g_{0}-C_{1}+C_{3},\ 3g_{1}+7g_{3}+\tfrac{1}{2}C_{2}-\tfrac{1}{6}C_{5
 \end{equation}
 Eq.~\ref{eq:f8} is the scheme of Blanes, Casas and Ros \cite{bcr2002} rewritten in Legendre moments, with the commutator operands rescaled to simplify the coefficients. All coefficients in Eqs.~\ref{eq:f2}-\ref{eq:f8} are exact rationals. Each formula was verified in exact rational arithmetic, by expanding it in the free algebra generated by the moments and comparing every term through weight $2n$ with Eq.~\ref{eq:target}, both with exact moments and with the moments of all the quadrature rules above (those with irrational nodes in floating-point or high-precision arithmetic).
 
-\section*{The Magnus quadrature algorithm}
+\section*{Integration of the differential equation}
 
 One integration step of length $h=2t$, from $t_c-t$ to $t_c+t$, proceeds as follows (with $A(\tau)$ replaced by $A(t_c+\tau)$ in the preceding sections):
 
@@ -473,7 +289,7 @@ Order & Moments & Random &  & Comm.-heavy &  & Rapid &  & Ratio \\
 
 Blanes, Casas and Ros \cite{bcr2000} introduced Magnus integrators built from univariate moments of $A$ (the integrals $B^{(i)}$ below) with $A$ expanded about the midpoint of the step, giving schemes of orders 4, 6 and 8 with 1, 4 and 10 commutators, evaluated with either Gauss-Legendre or Newton-Cotes quadrature. In \cite{bcr2002} they reduced the commutator counts to 1, 3 and 6, by optimizing in a graded free Lie algebra, and stated that these are the minimum numbers; for order 8 they showed that their five-commutator ansatz has no real solution. Their order-8 scheme is the only published one of that order known to us. The review by Blanes, Casas, Oteo and Ros \cite{bcor2009} presents the same framework, with explicit order-4 and order-6 schemes for both Gauss-Legendre and Newton-Cotes nodes (its Eqs. 251-258), and cites the six-commutator order-8 scheme. The present formulation differs from theirs in the following respects.
 
-\emph{Formulation.} Ref. \cite{bcor2009} writes the solution over a step in the centered form $Y(t_{1/2}+s/2)=\exp(\Omega(t_{1/2}+s/2,t_{1/2}-s/2))\cdot Y(t_{1/2}-s/2)$ (its Eq. 63), which is Eq.~\ref{eq:centered} with $s=2t$, and uses it to establish the time symmetry; the integrators are then derived from the conventional Magnus equation over $[t_n,t_n+h]$ with $A$ expanded about the midpoint. Here the centered relation is the starting point: the propagator equation (Eq.~\ref{eq:uode}) and the centered Magnus theorem (Eqs.~\ref{eq:theorem} and \ref{eq:evenodd}) are written directly for the centered interval, so the time symmetry ($U(-t)=U(t)^{-1}$, Eq.~\ref{eq:uinv}; $\Omega(t)$ odd, Eq.~\ref{eq:odd}) is built into the differential equation, which separates the even and odd parts of $A$. We have not found the centered differential equation in \cite{bcr2000}, \cite{bcr2002} or \cite{bcor2009}. The resulting series is the same as theirs.
+\emph{Formulation.} Ref. \cite{bcor2009} writes the solution over a step in the centered form $Y(t_{1/2}+s/2)=\exp(\Omega(t_{1/2}+s/2,t_{1/2}-s/2))\cdot Y(t_{1/2}-s/2)$ (its Eq. 63), which is Eq.~\ref{eq:centered} with $s=2t$, and uses it to establish the time symmetry; the integrators are then derived from the conventional Magnus equation over $[t_n,t_n+h]$ with $A$ expanded about the midpoint. Here the centered relation is the starting point: the propagator equation (Eq.~\ref{eq:uode}) and the centered Magnus theorem (Eq.~\ref{eq:evenodd}) are written directly for the centered interval, so the time symmetry ($U(-t)=U(t)^{-1}$, Eq.~\ref{eq:uinv}; $\Omega(t)$ odd, Eq.~\ref{eq:odd}) is built into the differential equation, which separates the even and odd parts of $A$. We have not found the centered differential equation in \cite{bcr2000}, \cite{bcr2002} or \cite{bcor2009}. The resulting series is the same as theirs.
 
 \emph{Moments.} Ref. \cite{bcr2002} uses the moments $B^{(i)}=h^{-i}\int(\tau-t_{n}-h/2)^{i}\cdot A(\tau)\,d\tau$ over the step, which in the centered notation are $B^{(i)}=(2t)^{-i}\int_{-t}^{t}\tau^{i}\cdot A(\tau)\,d\tau$ (\cite{bcr2000} divides by an extra factor $h$, and \cite{bcor2009} calls them $A^{(i)}$). In Legendre moments,
 \begin{equation}
@@ -481,7 +297,15 @@ B^{(0)}=g_{0},\quad B^{(1)}=\tfrac{1}{2}\cdot g_{1},\quad B^{(2)}=\tfrac{1}{6}\c
 \end{equation}
 The schemes of \cite{bcr2002} and \cite{bcor2009} are derived in the free Lie algebra generated by the midpoint Taylor terms $b_i=h^{i}A^{(i-1)}(t_{1/2})/(i-1)!$ (denoted $\alpha_i$ in \cite{bcor2009}), and the $b_i$ are then replaced by linear combinations of the $B^{(i)}$ that agree with them to the order considered. For order 6 these combinations are $g_0-\frac{5}{2}g_2$, $6g_1$ and $30g_2$, which are close to Legendre moments. Here the formulas are derived and verified directly in the Legendre moments, in which they hold exactly with no truncated change of variables. The orthogonality of the $P_k$ gives Eq.~\ref{eq:target} its simple structure (only $g_0$ outside commutators, and only $g_0,\ldots,g_{n-1}$ through order $2n$) and gives the simple accuracy criterion for the quadrature in the moment-quadrature section.
 
-\emph{Formulas.} At order 4 the formulas coincide with those of \cite{bcr2000}, \cite{bcr2002} and \cite{bcor2009}. At order 6, Eq.~\ref{eq:f6} uses three commutators like \cite{bcr2002}, Eqs. 3.5-3.7, but has a single term in the final sum, and its leading-error coefficients (the weight-7 residual, with each moment scaled by its leading size) have an 11\% smaller norm; on the test problems the two agree to within about 10\%. At order 8, Eq.~\ref{eq:f8} is the scheme of \cite{bcr2002} (its Eqs. 3.8-3.10). A search over all six-commutator patterns, which goes beyond the single ansatz of \cite{bcr2002}, found six families of solutions with 5 to 12 free parameters each. Minimizing the leading error over the families reduced that norm by a factor of about 1.8 below the scheme of \cite{bcr2002}, but gave no improvement on the test problems, and the optimized coefficients are not simple numbers; the published order-8 scheme is therefore effectively optimal. (The optimization in the title of \cite{bcr2002} refers to the number of commutators, not to the leading error.)
+\emph{Formulas.} At order 4 the formulas coincide with those of \cite{bcr2000}, \cite{bcr2002} and \cite{bcor2009}. At order 6, the three-commutator scheme of \cite{bcr2002} (its Eqs. 3.5-3.7, repeated in \cite{bcor2009} as its Eq. 251), translated to centered Legendre moments with Eq.~\ref{eq:bmom} ($b_1=g_0-\frac{5}{2}g_2$, $b_2=6g_1$, $b_3=30g_2$) and with its commutators rescaled, is
+\begin{equation}
+\begin{aligned}
+C_{1}&=\big[g_{0}-\tfrac{5}{2}g_{2},\ g_{1}\big]\\
+C_{2}&=\big[g_{0}-\tfrac{5}{2}g_{2},\ g_{2}+\tfrac{1}{10}C_{1}\big]\\
+\Omega(t)&=g_{0}-\tfrac{1}{2}\big[g_{0}-g_{2}-\tfrac{3}{10}C_{1},\ g_{1}-\tfrac{1}{6}C_{2}\big]+O(t^{7})
+\end{aligned}\label{eq:bcr6}
+\end{equation}
+This is identical to Eq.~\ref{eq:f6} except for the substitution of $g_0-\frac{5}{2}g_2$ for $g_0$ in $C_1$ and $C_2$, which changes $\Omega$ only at weight 7, the weight of the residual. The leading-error coefficients of Eq.~\ref{eq:f6} (the weight-7 residual, with each moment scaled by its leading size) have an 11\% smaller norm; on the test problems the two agree to within about 10\%. At order 8, Eq.~\ref{eq:f8} is the scheme of \cite{bcr2002} (its Eqs. 3.8-3.10). A search over all six-commutator patterns, which goes beyond the single ansatz of \cite{bcr2002}, found six families of solutions with 5 to 12 free parameters each. Minimizing the leading error over the families reduced that norm by a factor of about 1.8 below the scheme of \cite{bcr2002}, but gave no improvement on the test problems, and the optimized coefficients are not simple numbers; the published order-8 scheme is therefore effectively optimal. (The optimization in the title of \cite{bcr2002} refers to the number of commutators, not to the leading error.)
 
 \emph{Quadrature.} As in \cite{bcr2000} and \cite{bcor2009}, the moments can be computed with either Gauss-Legendre or Newton-Cotes nodes, and the Newton-Cotes endpoint sample can be reused in the next step. Ref. \cite{bcr2000} gives Newton-Cotes moment formulas for orders 6 and 8 and \cite{bcor2009} for orders 4 and 6, obtained by applying the Newton-Cotes rule to the products of $A$ with powers of the time variable; Eq.~\ref{eq:nc} gives interpolatory weights for all four orders, and the moment-quadrature section gives the general accuracy criterion (any rule of polynomial degree $2n-1$ suffices for order $2n$). The Gauss-Lobatto and Gauss-Kronrod rules given here are not used in \cite{bcr2000}, \cite{bcr2002} or \cite{bcor2009}. The results agree with the observation in \cite{bcr2002} that exact moments can be considerably more accurate than quadrature moments for some problems: in the rapidly varying test, exact moments are 3-6 times more accurate.
 
@@ -489,17 +313,18 @@ The schemes of \cite{bcr2002} and \cite{bcor2009} are derived in the free Lie al
 
 \section*{Code availability}
 
-MATLAB implementations of the formulas (explde.m, magnus\_exp.m and magnus10coef.m), these documents and their LyX and LaTeX sources are available at \url{https://github.com/kjinnovation/explde} and on MATLAB File Exchange, \url{https://www.mathworks.com/matlabcentral/fileexchange/183695-explde}.
+Documentation, code and research resources are available in the GitHub repository \url{https://github.com/kjinnovation/explde}, and the code also on MATLAB File Exchange, \url{https://www.mathworks.com/matlabcentral/fileexchange/183695-explde}. The MATLAB function explde.m solves $F'(t)=A(t)\cdot F(t)$ with the formulas of orders 2 to 10 of this paper and \cite{j10}, using Gauss-Legendre moments (computed in magnus\_exp.m); magnus10coef.m lists the order-10 coefficients. The repository also contains the tutorial \cite{jtut}, this paper and \cite{j10} with their Word, LyX and LaTeX sources, and research resources: a guide to the derivation and verification methods, Python reference code in exact rational arithmetic, and the defining equations of the order-10 coefficients.
 
 \section*{Acknowledgment}
 
 This work was carried out with the assistance of Claude Opus 5.5 (Anthropic), a large language model. Under the author's direction, Claude derived the Magnus series in Legendre moments, searched for minimal-commutator formulas and optimized their leading error, and drafted portions of the text.
 
 \begin{thebibliography}{9}
+\bibitem{jtut} K. C. Johnson, ``Quadrature approximation to the Magnus exponent for numerical solution of non-autonomous coupled linear differential equations,'' Version 09-Nov-2026, explde.pdf, \url{https://github.com/kjinnovation/explde}, \url{https://vixra.org/abs/2604.0065}
+\bibitem{j10} K. C. Johnson, ``Magnus quadrature formulas of order 10 on a centered interval,'' Version 09-Nov-2026, magnus\_order\_10.pdf, \url{https://github.com/kjinnovation/explde}, \url{https://ai.vixra.org/abs/2611.0004}
 \bibitem{bcr2000} S. Blanes, F. Casas, J. Ros, ``Improved high order integrators based on the Magnus expansion,'' \emph{BIT Numerical Mathematics} 40 (2000) 434-450.
 \bibitem{bcr2002} S. Blanes, F. Casas, J. Ros, ``High order optimized geometric integrators for linear differential equations,'' \emph{BIT Numerical Mathematics} 42 (2002) 262-284.
 \bibitem{bcor2009} S. Blanes, F. Casas, J. A. Oteo, J. Ros, ``The Magnus expansion and some of its applications,'' \emph{Physics Reports} 470 (2009) 151-238. \url{https://doi.org/10.1016/j.physrep.2008.11.001}, \url{https://arxiv.org/abs/0810.5488}
-\bibitem{j10} K. C. Johnson, ``Magnus quadrature formulas of order 10 on a centered interval,'' Version 02-Nov-2026, magnus\_order\_10.pdf, \url{https://github.com/kjinnovation/explde}
 \bibitem{kronrod} A. S. Kronrod, \emph{Nodes and Weights of Quadrature Formulas: Sixteen-Place Tables}, Consultants Bureau, New York, 1965.
 \end{thebibliography}
 

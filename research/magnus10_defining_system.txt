@@ -2,9 +2,10 @@ magnus10_defining_system.txt
 Defining polynomial system and high-precision solution for the order-10 centered Magnus
 quadrature formula (Eq. 3) of
   K. C. Johnson, "Magnus quadrature formulas of order 10 on a centered interval,"
-  Version 02-Nov-2026, magnus_order_10.pdf, https://github.com/kjinnovation/explde
+  Version 09-Nov-2026, magnus_order_10.pdf, https://github.com/kjinnovation/explde,
+  https://ai.vixra.org/abs/2611.0004
 Author: Kenneth C. Johnson, ken@kjinnovation.com. Prepared with the assistance of Claude Opus 5.5
-(Anthropic), 02-Nov-2026.
+(Anthropic), 09-Nov-2026.
 
 Coefficients x1..x81 are numbered as in Eq. 3 and Appendix A of the paper (also the vector x
 returned by magnus10coef.m). 25 of them are exact rationals (listed first); the other 56 are the

@@ -39,7 +39,6 @@ function [F,F_] = explde(A,t,ord,F0)
 %   pageexpm.m and magnus_exp.m must be on the MATLAB path; otherwise
 %   explde will fail.
 %   https://www.mathworks.com/matlabcentral/fileexchange/107959-pageexpm
-%   For ord = 10, magnus_exp also requires magnus10coef.m.
 %
 % Syntax:
 %    F = explde(A);
@@ -80,7 +79,7 @@ function [F,F_] = explde(A,t,ord,F0)
 %   F_ (optional): cell vector, size-[1,Nt]. F_{j} is the equation solution
 %   at t(j) (or t(1,j,:,:,...) for non-vector t).
 
-% version 02-Nov-2026, Ken Johnson, ken@kjinnovation.com
+% version 09-Nov-2026, Ken Johnson, ken@kjinnovation.com
 
 % Argument defaults and validation:
 narginchk(1,4)

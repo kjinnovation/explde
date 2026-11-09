@@ -3,33 +3,36 @@
   Research notes and reproduction guide for centered Magnus quadrature formulas of orders 2-10.
 
   Companion documents (cite these for the results; this file records the method):
-    [1] K. C. Johnson, "The centered Magnus exponent and Magnus quadrature formulas of orders 2, 4, 6 and 8,"
-        Version 02-Nov-2026, magnus_order_2-8.pdf
+    [1] K. C. Johnson, "The Centered Magnus Exponent and Magnus Quadrature Formulas of Orders 2, 4, 6 and 8,"
+        Version 09-Nov-2026, magnus_order_2-8.pdf, https://ai.vixra.org/abs/2611.0005
     [2] K. C. Johnson, "Magnus quadrature formulas of order 10 on a centered interval,"
-        Version 02-Nov-2026, magnus_order_10.pdf
+        Version 09-Nov-2026, magnus_order_10.pdf, https://ai.vixra.org/abs/2611.0004
+    [7] K. C. Johnson, "Quadrature approximation to the Magnus exponent for numerical solution of
+        non-autonomous coupled linear differential equations," Version 09-Nov-2026, explde.pdf,
+        https://vixra.org/abs/2604.0065 (introductory tutorial)
     Repository:       https://github.com/kjinnovation/explde
     Coefficient file: magnus10coef.m  ([x,y] = magnus10coef(); Appendices A and B of [2])
     Reference code:   magnus_ref.py   (reproduced in full in the Appendix below)
 
   Author: Kenneth C. Johnson, ken@kjinnovation.com
-  Prepared with the assistance of Claude Opus 5.5 (Anthropic). Version 02-Nov-2026.
+  Prepared with the assistance of Claude Opus 5.5 (Anthropic). Version 09-Nov-2026.
 -->
 
 # Centered Magnus quadrature in Legendre moments: research notes and reproduction guide
 
-This file describes how the Magnus quadrature formulas in [1] and [2] were derived and verified, and what was learned along the way, so that other researchers can reproduce the work and extend it, for example in sessions with Claude or another AI assistant. The papers give the results. This file gives the procedure, the checks, the dead ends, and open questions.
+This file describes how the Magnus quadrature formulas in [1] and [2] were derived and verified (the introductory tutorial [7] derives the centered formulation and the order-6 formula by hand), and what was learned along the way, so that other researchers can reproduce the work and extend it, for example in sessions with Claude or another AI assistant. The papers give the results. This file gives the procedure, the checks, the dead ends, and open questions.
 
 ## 1. Problem and notation
 
 The linear system $F'(t)=A(t)\,F(t)$ is advanced over a centered interval $[-t,t]$ (step $h=2t$) by $F(t)=\exp(\Omega(t))\,F(-t)$. The propagator $U(t)=V(t)V(-t)^{-1}$ satisfies $U'=A(t)U+UA(-t)$ and $U(-t)=U(t)^{-1}$, so $\Omega$ is odd in $t$. (Here $V$ is the conventional propagator, $V'=AV$, $V(0)=I$. Do not write $F(t)F(-t)^{-1}$: $F$ is a vector.)
 
-**Centered Magnus theorem** ([1], Eq. 34):
+**Centered Magnus theorem** ([1], Eq. 6):
 
 $$\Omega'=\sum_{k\ \mathrm{even}}\frac{B_k}{k!}\,\mathrm{ad}_\Omega^k\big(A(t)+A(-t)\big)-\tfrac12\big[\Omega,\;A(t)-A(-t)\big].$$
 
-**Centered Legendre moments** ([1], Eq. 35): $g_k(t)=\int_{-t}^{t}P_k(\tau/t)\,A(\tau)\,d\tau$. $g_k=O(t^{k+1})$, *weight* $k+1$; $g_0,g_2,g_4$ are odd in $t$, $g_1,g_3$ even. They equal the Legendre moments over $[0,h]$ (with $P_k(2\tau/h-1)$) for $h=2t$, so formulas derived on $[0,h]$ about the midpoint carry over unchanged.
+**Centered Legendre moments** ([1], Eq. 7): $g_k(t)=\int_{-t}^{t}P_k(\tau/t)\,A(\tau)\,d\tau$. $g_k=O(t^{k+1})$, *weight* $k+1$; $g_0,g_2,g_4$ are odd in $t$, $g_1,g_3$ even. They equal the Legendre moments over $[0,h]$ (with $P_k(2\tau/h-1)$) for $h=2t$, so formulas derived on $[0,h]$ about the midpoint carry over unchanged.
 
-**Series** ([1], Eq. 41; [2], Eq. 2). The only term outside commutators is $g_0$; only odd weights occur; $g_k$ first appears at weight $2k+1$. An order-$2n$ formula (residual $O(t^{2n+1})$) needs $g_0,\dots,g_{n-1}$ and must match the series at odd weights $\le 2n-1$.
+**Series** ([1], Eq. 9; [2], Eq. 2). The only term outside commutators is $g_0$; only odd weights occur; $g_k$ first appears at weight $2k+1$. An order-$2n$ formula (residual $O(t^{2n+1})$) needs $g_0,\dots,g_{n-1}$ and must match the series at odd weights $\le 2n-1$.
 
 | Order | Moments | Order conditions (weights 3, 5, 7, 9) | Total | Commutators used |
 |---|---|---|---|---|
@@ -44,8 +47,8 @@ $$\Omega'=\sum_{k\ \mathrm{even}}\frac{B_k}{k!}\,\mathrm{ad}_\Omega^k\big(A(t)+A
 ## 2. Results in brief
 
 * **Order 4:** $\Omega=g_0-\tfrac12[g_0,g_1]$.
-* **Order 6** ([1], Eq. 47): $C_1=[g_0,g_1]$, $C_2=[g_0,\,g_2+\tfrac1{10}C_1]$, $C_3=[g_0-g_2-\tfrac3{10}C_1,\;g_1-\tfrac16C_2]$, $\Omega=g_0-\tfrac12C_3$. Its leading-error norm is 11% below that of Blanes-Casas-Ros (BCR 2002).
-* **Order 8** ([1], Eq. 48): the BCR 2002 six-commutator scheme rewritten in Legendre moments (`ORDER8` in the Appendix code). A search over all six-commutator parity patterns found six solution families (5-12 free parameters); minimizing the leading error gave a norm 1.8 times smaller but no improvement on tests, so BCR's scheme is effectively optimal.
+* **Order 6** ([1], Eq. 15): $C_1=[g_0,g_1]$, $C_2=[g_0,\,g_2+\tfrac1{10}C_1]$, $C_3=[g_0-g_2-\tfrac3{10}C_1,\;g_1-\tfrac16C_2]$, $\Omega=g_0-\tfrac12C_3$. Its leading-error norm is 11% below that of Blanes-Casas-Ros (BCR 2002).
+* **Order 8** ([1], Eq. 16): the BCR 2002 six-commutator scheme rewritten in Legendre moments (`ORDER8` in the Appendix code). A search over all six-commutator parity patterns found six solution families (5-12 free parameters); minimizing the leading error gave a norm 1.8 times smaller but no improvement on tests, so BCR's scheme is effectively optimal.
 * **Order 10** ([2]): nine commutators, parity pattern OE, OE, OO, OE, OO, OE, OO, OE, OE; 81 coefficients $x_k$ (25 rational, 56 irrational algebraic numbers). No eight-commutator formula was found. Coefficients: Appendix A of [2] and `magnus10coef.m`.
 * **Embedded pair** ([2]): on 7 Gauss-Kronrod nodes, an order-6 estimate from the 3 Gauss nodes (3 commutators, rational) and an order-10 estimate with 7 more commutators (96 coefficients $y_k$; 35 rational, 61 irrational). $\|M_{10}-M_6\|$ estimates the error.
 
@@ -76,7 +79,7 @@ Each step lists what was done and the check that confirmed it. The Appendix has 
 
 **Step 6 - Root polishing and conditioning.** With the rationals fixed, the remaining coefficients satisfy a polynomial system with rational coefficients (order 10: 70 equations in 56 unknowns, degree ≤ 13, 4,951 terms). Polish by Gauss-Newton, $x\leftarrow x-(J^TJ)^{-1}J^TE(x)$, evaluating $E$ and $J$ from exact rational coefficients in high-precision decimal arithmetic (320 digits). Convergence is quadratic (from 17 digits: $10^{-15}\to10^{-31}\to10^{-53}\to10^{-107}\to10^{-206}$). Full column rank of $J$ shows the solution is isolated, so the coefficients are real algebraic numbers. Order 10: $\kappa(J)=2.0\times10^8$ ($2.3\times10^7$ column-scaled); Kronrod pair: $78\times61$, $\kappa=3.2\times10^{10}$ ($1.9\times10^8$ scaled). The condition number limits recovering the coefficients from residuals, not the use of the formula: rounding the coefficients to double changes the residuals by about $10^{-15}$. Integer-relation (LLL) tests excluded minimal polynomials of degree ≤ 12 with coefficients below about $10^{10}$.
 
-**Step 7 - Quadrature rules.** For a rule $g_k\approx 2t\sum_iW_{ki}A(u_it)$ (the form of [1], Eq. 42), express each quadrature moment in exact moments, $\tilde g_k=\sum_m Q_{km}g_m$ with $Q_{km}=(2m+1)\sum_iW_{ki}P_m(u_i)$, substitute into the formula, and compare every word through weight $2n$ (order 10: letters $g_0..g_9$, weight ≤ 10) with the series. Product weights are $W_{ki}=w_iP_k(u_i)$, with the weights normalized so that $\sum_iw_i=1$ as in [1] and [2]; interpolatory weights are $W_{ki}=\frac12\int_{-1}^1P_kL_i$. A deliberately weak rule (e.g. 5 equally spaced nodes at order 10) should fail this test, which is a useful control.
+**Step 7 - Quadrature rules.** For a rule $g_k\approx 2t\sum_iW_{ki}A(u_it)$ (the form of [1], Eq. 10), express each quadrature moment in exact moments, $\tilde g_k=\sum_m Q_{km}g_m$ with $Q_{km}=(2m+1)\sum_iW_{ki}P_m(u_i)$, substitute into the formula, and compare every word through weight $2n$ (order 10: letters $g_0..g_9$, weight ≤ 10) with the series. Product weights are $W_{ki}=w_iP_k(u_i)$, with the weights normalized so that $\sum_iw_i=1$ as in [1] and [2]; interpolatory weights are $W_{ki}=\frac12\int_{-1}^1P_kL_i$. A deliberately weak rule (e.g. 5 equally spaced nodes at order 10) should fail this test, which is a useful control.
 
 **Step 8 - Numerical tests** ([1], Results). $4\times4$ matrix polynomials $A(\tau)=\sum_{k=0}^{12}C_k\tau^k$, $C_k=s\,d^k N_k$, $N_k$ standard normal from `numpy.random.default_rng(seed)`, with (seed, $s$, $d$) = (42, 1, 0.8) random, (9, 2, 0.5) commutator-heavy, (7, 0.3, 1.5) rapidly varying. Reference: $\Omega=\log(V(t)V(-t)^{-1})$ with $V$ from its Taylor series (200 terms) and `scipy.linalg.logm`. Use $t=0.4,0.2,0.1,0.05$; error ratios per halving should approach $2^{2n+1}$. At order 10 the rapidly varying test reaches rounding level (~$2\times10^{-15}$) at $t=0.05$.
 
@@ -123,32 +126,37 @@ Example prompts:
 
 ## 7. References
 
-1. K. C. Johnson, "The centered Magnus exponent and Magnus quadrature formulas of orders 2, 4, 6 and 8," Version 02-Nov-2026 (magnus_order_2-8.pdf).
-2. K. C. Johnson, "Magnus quadrature formulas of order 10 on a centered interval," Version 02-Nov-2026 (magnus_order_10.pdf).
+1. K. C. Johnson, "The Centered Magnus Exponent and Magnus Quadrature Formulas of Orders 2, 4, 6 and 8," Version 09-Nov-2026, magnus_order_2-8.pdf, https://github.com/kjinnovation/explde, https://ai.vixra.org/abs/2611.0005
+2. K. C. Johnson, "Magnus quadrature formulas of order 10 on a centered interval," Version 09-Nov-2026, magnus_order_10.pdf, https://github.com/kjinnovation/explde, https://ai.vixra.org/abs/2611.0004
 3. S. Blanes, F. Casas, J. Ros, "Improved high order integrators based on the Magnus expansion," *BIT* 40 (2000) 434-450.
 4. S. Blanes, F. Casas, J. Ros, "High order optimized geometric integrators for linear differential equations," *BIT* 42 (2002) 262-284.
 5. S. Blanes, F. Casas, J. A. Oteo, J. Ros, "The Magnus expansion and some of its applications," *Physics Reports* 470 (2009) 151-238.
 6. A. S. Kronrod, *Nodes and Weights of Quadrature Formulas: Sixteen-Place Tables*, Consultants Bureau, New York, 1965.
+7. K. C. Johnson, "Quadrature approximation to the Magnus exponent for numerical solution of non-autonomous coupled linear differential equations," Version 09-Nov-2026, explde.pdf, https://github.com/kjinnovation/explde, https://vixra.org/abs/2604.0065 (introductory tutorial).
 
 ## Appendix: reference code (magnus_ref.py)
 
-Self-contained (Python 3, standard library only). `python3 magnus_ref.py` prints the series through weight 7 in the Lyndon basis (it should match [1], Eq. 41) and verifies the order-4, 6 and 8 formulas with exact moments and the order-6 formula with five-node Newton-Cotes moments (expected output: 0 mismatches each).
+Self-contained (Python 3, standard library only). `python3 magnus_ref.py` prints the series through weight 7 in the Lyndon basis (it should match [1], Eq. 9) and verifies the order-4, 6 and 8 formulas with exact moments and the order-6 formula with five-node Newton-Cotes moments (expected output: 0 mismatches each).
 
 ```python
 """magnus_ref.py -- reference implementation for centered Magnus quadrature in Legendre moments.
 
 Companion code for
-  [1] K. C. Johnson, "The centered Magnus exponent and Magnus quadrature formulas of orders 2, 4, 6
-      and 8," Version 02-Nov-2026 (magnus_order_2-8.pdf).
+  [1] K. C. Johnson, "The Centered Magnus Exponent and Magnus Quadrature Formulas of Orders 2, 4, 6
+      and 8," Version 09-Nov-2026, magnus_order_2-8.pdf, https://ai.vixra.org/abs/2611.0005
   [2] K. C. Johnson, "Magnus quadrature formulas of order 10 on a centered interval,"
-      Version 02-Nov-2026 (magnus_order_10.pdf); coefficients in magnus10coef.m.
+      Version 09-Nov-2026, magnus_order_10.pdf, https://ai.vixra.org/abs/2611.0004;
+      coefficients in magnus10coef.m.
+  Introductory tutorial: K. C. Johnson, "Quadrature approximation to the Magnus exponent for
+      numerical solution of non-autonomous coupled linear differential equations,"
+      Version 09-Nov-2026, explde.pdf, https://vixra.org/abs/2604.0065
 Repository: https://github.com/kjinnovation/explde
 Written with the assistance of Claude Opus 5.5 (Anthropic).
 
 What it does (pure Python, exact rational arithmetic with fractions.Fraction):
   1. centered_series(D): the Magnus exponent Omega(t) through t^D in centered Legendre moments g_k,
-     derived from the centered Magnus theorem ([1], Eq. 34).
-  2. lie_decompose(): rewrite a Lie polynomial in the Lyndon basis (as printed in [1], Eq. 41).
+     derived from the centered Magnus theorem ([1], Eq. 6).
+  2. lie_decompose(): rewrite a Lie polynomial in the Lyndon basis (as printed in [1], Eq. 9).
   3. evaluate(): expand a nested-commutator formula in the free algebra of the moments, so that it can
      be compared word by word with the series (the exact verification used in [1] and [2]).
   4. quad_moments(): express quadrature moments in exact moments, to verify a quadrature rule.
@@ -281,7 +289,7 @@ def evaluate(formula,G,W):
     return out
 def letter(k): return {(k,):F(1)}
 def quad_moments(nodes,W_k,M):
-    """Moments of a rule g_k ~ 2t*sum_i W_k[i] A(u_i t) (as in [1], Eq. 42, where W_k[i] = w_i P_k(u_i)
+    """Moments of a rule g_k ~ 2t*sum_i W_k[i] A(u_i t) (as in [1], Eq. 10, where W_k[i] = w_i P_k(u_i)
     with sum_i w_i = 1), expressed in exact moments g_0..g_{M-1} (exact when the u_i, W_k[i] are rational)."""
     G=[]
     for Wk in W_k:

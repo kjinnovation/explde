@@ -3,13 +3,15 @@ function [x,y] = magnus10coef()
 %   [x,y] = magnus10coef() returns two column vectors:
 %     x  (81-by-1)  coefficients x_1..x_81 of the nine-commutator formula
 %                  (Eq. 3 and Appendix A of K. C. Johnson, "Magnus quadrature
-%                  formulas of order 10 on a centered interval", Version 02-Nov-2026,
-%                  magnus_order_10.pdf, https://github.com/kjinnovation/explde)
+%                  formulas of order 10 on a centered interval," Version 09-Nov-2026,
+%                  magnus_order_10.pdf, https://github.com/kjinnovation/explde,
+%                  https://ai.vixra.org/abs/2611.0004)
 %     y  (96-by-1)  coefficients y_1..y_96 of stage 2 of the embedded Gauss-Kronrod
 %                  pair (Eqs. 8-9 and Appendix B of the same paper)
 %   The order of the elements is that of Appendices A and B. Rational
 %   coefficients are written as exact fractions, irrational ones to 30
-%   significant digits.
+%   significant digits. (The x coefficients are also hard-coded in
+%   magnus_exp.m, which does not call this function.)
 
 x = [
     5/3

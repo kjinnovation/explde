@@ -1,6 +1,6 @@
 % demo_explde.m
 % Code examples for explde.m
-% Ver 02-Nov-2026
+% Ver 09-Nov-2026
 
 % Solve for F(t): F'(t) = A(t)*F(t), F(0) = F0
 
